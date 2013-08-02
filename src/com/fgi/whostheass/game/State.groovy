@@ -4,4 +4,5 @@ class State {
 
     def players
     def moves
+    def tricks
 }

@@ -21,10 +21,16 @@ public enum CardValue {
 
     static numberCards = [One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Eleven, Twelve, Thirteen]
 
-    def value
+    def points
 
-    CardValue(v) {
+    CardValue(p) {
 
-        value = v
+        points = p
+    }
+
+    @Override
+    public String toString() {
+
+        this == Ass ? "[The Ass]" : name()
     }
 }

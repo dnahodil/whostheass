@@ -6,6 +6,6 @@ class WhosTheAss {
 
     public static void main(String[] args) {
 
-        new Game([])
+        new Game([[:],[:],[:]])
     }
 }

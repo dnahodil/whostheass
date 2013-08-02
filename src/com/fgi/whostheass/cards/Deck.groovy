@@ -2,28 +2,59 @@ package com.fgi.whostheass.cards
 
 class Deck {
 
-    static final def numberOfJokers = 5
-    static final def numberOfEachNumber = 8
+    static final def numberOfJokersInDeck = 5
+    static final def numberOfEachNumberInDeck = 8
+    static final def numberOfCardsInHand = 13 // Does this belong here?
 
-    def cards = []
+    def cards = [] as LinkedList
+
+    def Deck() {
+
+        cards.addAll jokers
+        cards.addAll numberCards
+        // Only add The Ass once we know how many Players we're dealing to
+
+        Collections.shuffle cards
+    }
 
     void deal(players) {
 
-        // Insert Ass
+        def numPlayers = players.size()
 
-        cards.each{ println it }
+        insertAss assLocation(numPlayers)
+
+        numberOfCardsBeingDealt(numPlayers).times {
+            cardIndexBeingDealt ->
+
+            def dealTo = cardIndexBeingDealt % numPlayers
+
+            players[dealTo].dealCard(nextCard)
+        }
+
+        players.each {
+
+            println "$it has these Cards: ${it.hand.cards}"
+        }
     }
 
-    static def shuffledDeck() {
+    void insertAss(location) {
 
-        def deck = new Deck()
+        cards.add location, theAss
+    }
 
-        deck.cards.addAll jokers
-        deck.cards.addAll numberCards
+    def assLocation(numPlayers) {
 
-        Collections.shuffle deck.cards
+        new Random().nextInt(numberOfCardsBeingDealt(numPlayers))
+    }
 
-        return deck
+    def numberOfCardsBeingDealt(numPlayers) {
+
+        numPlayers * numberOfCardsInHand
+    }
+
+    def getNextCard() {
+
+        cards.removeFirst()
     }
 
     static def getTheAss() {
@@ -35,7 +66,7 @@ class Deck {
 
         def jokers = []
 
-        numberOfJokers.times{ jokers << new Card(CardValue.Joker) }
+        numberOfJokersInDeck.times{ jokers << new Card(CardValue.Joker) }
 
         return jokers
     }
@@ -47,7 +78,7 @@ class Deck {
         CardValue.numberCards.each {
             cardValue ->
 
-            numberOfEachNumber.times {
+            numberOfEachNumberInDeck.times {
 
                 numbers << new Card(cardValue)
             }
