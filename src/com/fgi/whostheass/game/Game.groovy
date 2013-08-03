@@ -2,16 +2,16 @@ package com.fgi.whostheass.game
 
 import com.fgi.whostheass.cards.Deck
 import com.fgi.whostheass.player.Player
-import static Rules.*
+import static com.fgi.whostheass.game.Rules.*
 
 class Game {
 
-    def players = []
-    def state
+    def players
 
     Game(playerStrategies) {
 
-        if (!validNumberOfPlayers.contains(playerStrategies.size())) throw new IllegalStateException("Must have $validNumberOfPlayers Players")
+        if (!validNumberOfPlayers.contains(playerStrategies.size()))
+            throw new IllegalStateException("Must have $validNumberOfPlayers Players. Tried to play game with ${playerStrategies.size()}.")
 
         initPlayers(playerStrategies)
 
@@ -20,23 +20,31 @@ class Game {
 
     def initPlayers(playerStrategies) {
 
+        players = []
+
         playerStrategies.each {
-            strat ->
 
-            players << new Player(name: nextPlayerName, strategy: strat)
+            players << new Player(strategy: it)
         }
-    }
 
-    def getNextPlayerName() {
-
-        return "Player ${('A'..'Z')[players.size()]}"
+		Collections.shuffle players
     }
 
     def play() {
 
-        while (!state.winner) {
+		def nextPlayLeader = players.find{ it.hasTheAss() }
 
-            state = new Trick().play(state)
+		while (nextPlayLeader.cards.size()) {
+
+			def trick = new Trick(playLeader: nextPlayLeader)
+
+			def winner = trick.play()
+
+			println "$trick was won by $winner"
+
+			nextPlayLeader = winner
         }
+
+		return nextPlayLeader
     }
 }

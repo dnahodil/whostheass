@@ -2,9 +2,24 @@ package com.fgi.whostheass.game
 
 class Trick {
 
-    def winner
+	static def trickCount = 0
 
-    def play(state) {
+	def id
+	def playLeader
 
+	def Trick() {
+
+		id = trickCount++
+	}
+
+	def play() {
+
+		return playLeader
     }
+
+	@Override
+	public String toString() {
+
+		"Trick #$id"
+	}
 }

@@ -5,4 +5,5 @@ class State {
     def players
     def moves
     def tricks
+	def winner
 }

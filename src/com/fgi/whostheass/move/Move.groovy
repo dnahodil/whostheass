@@ -2,5 +2,12 @@ package com.fgi.whostheass.move
 
 class Move {
 
-    def cards
+    def card
+	def cards
+	def type
+
+	def canPlayOn(trick) {
+
+		return false
+	}
 }

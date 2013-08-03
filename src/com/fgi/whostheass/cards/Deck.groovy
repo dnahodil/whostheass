@@ -1,18 +1,16 @@
 package com.fgi.whostheass.cards
 
-class Deck {
+import static com.fgi.whostheass.game.Rules.*
 
-    static final def numberOfJokersInDeck = 5
-    static final def numberOfEachNumberInDeck = 8
-    static final def numberOfCardsInHand = 13 // Does this belong here?
+class Deck {
 
     def cards = [] as LinkedList
 
     def Deck() {
 
-        cards.addAll jokers
-        cards.addAll numberCards
-        // Only add The Ass once we know how many Players we're dealing to
+        cards.addAll Card.jokers
+        cards.addAll Card.numberCards
+        // We only add The Ass once we know how many Players we're dealing to
 
         Collections.shuffle cards
     }
@@ -20,70 +18,36 @@ class Deck {
     void deal(players) {
 
         def numPlayers = players.size()
+        def numCardsBeingDealt = numPlayers * numberOfCardsInHand
 
-        insertAss assLocation(numPlayers)
+        insertAss randomLocationFor(numCardsBeingDealt)
 
-        numberOfCardsBeingDealt(numPlayers).times {
-            cardIndexBeingDealt ->
+        while (players.first().cards.size() < numberOfCardsInHand) {
 
-            def dealTo = cardIndexBeingDealt % numPlayers
+            players.each {
 
-            players[dealTo].dealCard(nextCard)
+                it.dealCard nextCard
+            }
         }
 
         players.each {
 
-            println "$it has these Cards: ${it.hand.cards}"
+            println "$it has these Cards: ${it.cards}"
         }
     }
 
     void insertAss(location) {
 
-        cards.add location, theAss
+        cards.add location, Card.theAss
     }
 
-    def assLocation(numPlayers) {
+    def randomLocationFor(numCardsBeingDealt) {
 
-        new Random().nextInt(numberOfCardsBeingDealt(numPlayers))
-    }
-
-    def numberOfCardsBeingDealt(numPlayers) {
-
-        numPlayers * numberOfCardsInHand
+        new Random().nextInt(numCardsBeingDealt)
     }
 
     def getNextCard() {
 
         cards.removeFirst()
-    }
-
-    static def getTheAss() {
-
-        new Card(CardValue.Ass)
-    }
-
-    static def getJokers() {
-
-        def jokers = []
-
-        numberOfJokersInDeck.times{ jokers << new Card(CardValue.Joker) }
-
-        return jokers
-    }
-
-    static def getNumberCards() {
-
-        def numbers = []
-
-        CardValue.numberCards.each {
-            cardValue ->
-
-            numberOfEachNumberInDeck.times {
-
-                numbers << new Card(cardValue)
-            }
-        }
-
-        return numbers
     }
 }
