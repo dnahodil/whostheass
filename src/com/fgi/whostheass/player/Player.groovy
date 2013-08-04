@@ -16,6 +16,11 @@ class Player {
         id = playerCount++
     }
 
+	def getNextMove() {
+
+		strategy.chooseMove()
+	}
+
     def dealCard(card) {
 
         cards << card
@@ -46,6 +51,11 @@ class Player {
 	def sortCards() {
 
 		cards = cards.sort{ it.value.points }
+	}
+
+	def getPoints() {
+
+		cards ? cards.sum{ it.value.points } : 0
 	}
 
     @Override

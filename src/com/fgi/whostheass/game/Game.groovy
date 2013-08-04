@@ -36,7 +36,7 @@ class Game {
 
 		while (nextPlayLeader.cards.size()) {
 
-			def trick = new Trick(playLeader: nextPlayLeader)
+			def trick = new Trick(playLeader: nextPlayLeader, players: players)
 
 			def winner = trick.play()
 
@@ -45,6 +45,14 @@ class Game {
 			nextPlayLeader = winner
         }
 
-		return nextPlayLeader
+		playersInOrderAdded.each {
+
+			println "$it finished with ${it.points} points"
+		}
     }
+
+	def getPlayersInOrderAdded() {
+
+		players.sort{ it.id }
+	}
 }
