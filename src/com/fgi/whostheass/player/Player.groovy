@@ -1,7 +1,6 @@
 package com.fgi.whostheass.player
 
 import com.fgi.whostheass.cards.Card
-import com.fgi.whostheass.cards.CardValue
 
 class Player {
 
@@ -16,9 +15,19 @@ class Player {
         id = playerCount++
     }
 
-	def getNextMove() {
+	def playNormalRound(playersWhoHavePlayed, movesPlayed, playersStillToPlay) {
 
-		strategy.chooseMove()
+		strategy.playNormalRound(cards, playersWhoHavePlayed, movesPlayed, playersStillToPlay)
+	}
+
+	def playAssRound(playersWhoHavePlayed, movesPlayed, playersStillToPlay) {
+
+		strategy.playAssRound(cards, playersWhoHavePlayed, movesPlayed, playersStillToPlay)
+	}
+
+	def startRound(playersStillToPlay) {
+
+		strategy.startRound(cards, playersStillToPlay)
 	}
 
     def dealCard(card) {
@@ -37,7 +46,7 @@ class Player {
 
 	def hasTheAss() {
 
-		cards.find{ it.value == CardValue.Ass } as boolean
+		cards.find{ it == Card.Ass } as boolean
 	}
 
 	def viewOfHand() {
@@ -50,12 +59,12 @@ class Player {
 
 	def sortCards() {
 
-		cards = cards.sort{ it.value.points }
+		cards = cards.sort{ it.points }
 	}
 
 	def getPoints() {
 
-		cards ? cards.sum{ it.value.points } : 0
+		cards ? cards.sum{ it.points } : 0
 	}
 
     @Override

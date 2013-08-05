@@ -6,5 +6,9 @@ import com.fgi.whostheass.player.OpponentView
 
 interface PlayStrategy {
 
-	public Move chooseMove(List<Card> cards, List<OpponentView> playersWhovePlayed, List<Move> movesPlayed, List<OpponentView> playersStillToPlay)
+	public List<Card> playNormalRound(List<Card> cardsInHand, List<OpponentView> playersWhoHavePlayed, List<Move> movesPlayed, List<OpponentView> playersStillToPlay)
+
+	public List<Card> playAssRound(List<Card> cardsInHand, List<OpponentView> playersWhoHavePlayed, List<Move> movesPlayed, List<OpponentView> playersStillToPlay)
+
+	public List<Card> startRound(List<Card> cardsInHand, List<OpponentView> playersStillToPlay)
 }

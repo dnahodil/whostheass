@@ -38,7 +38,7 @@ class Deck {
 
     void insertAss(location) {
 
-        cards.add location, Card.theAss
+        cards.add location, Card.Ass
     }
 
     def randomLocationFor(numCardsBeingDealt) {

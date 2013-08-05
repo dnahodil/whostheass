@@ -1,49 +1,64 @@
 package com.fgi.whostheass.cards
 
-import static com.fgi.whostheass.game.Rules.*
+import static com.fgi.whostheass.game.Rules.getNumberOfEachNumberInDeck
+import static com.fgi.whostheass.game.Rules.getNumberOfJokersInDeck
 
-class Card {
+public enum Card {
 
-    def value
+    Ass(20),
+    Joker(14),
 
-    def Card() {
+    One(1),
+    Two(2),
+    Three(3),
+    Four(4),
+    Five(5),
+    Six(6),
+    Seven(7),
+    Eight(8),
+    Nine(9),
+    Ten(10),
+    Eleven(11),
+    Twelve(12),
+    Thirteen(13)
+
+    def points
+
+	Card(p) {
+
+        points = p
     }
 
     @Override
     public String toString() {
 
-        return value
+        this == Ass ? "[The Ass]" : name()
     }
 
-    static def getTheAss() {
+	static def getJokers() {
 
-        new Card(value: CardValue.Ass)
-    }
+		def jokers = []
 
-    static def getJokers() {
+		numberOfJokersInDeck.times{
+			jokers << Joker
+		}
 
-        def jokers = []
+		return jokers
+	}
 
-        numberOfJokersInDeck.times{
-            jokers << new Card(value: CardValue.Joker)
-        }
+	static def getNumberCards() {
 
-        return jokers
-    }
+		def numbers = []
 
-    static def getNumberCards() {
+		[One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Eleven, Twelve, Thirteen].each {
+			cardValue ->
 
-        def numbers = []
+				numberOfEachNumberInDeck.times {
 
-        CardValue.numberCards.each {
-            cardValue ->
+					numbers << cardValue
+				}
+		}
 
-                numberOfEachNumberInDeck.times {
-
-                    numbers << new Card(value: cardValue)
-                }
-        }
-
-        return numbers
-    }
+		return numbers
+	}
 }

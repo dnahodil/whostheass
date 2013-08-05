@@ -1,6 +1,7 @@
 package com.fgi.whostheass.game
 
 import com.fgi.whostheass.cards.Deck
+import com.fgi.whostheass.move.Move
 import com.fgi.whostheass.player.Player
 import static com.fgi.whostheass.game.Rules.*
 
@@ -36,11 +37,15 @@ class Game {
 
 		while (nextPlayLeader.cards.size()) {
 
-			def trick = new Trick(playLeader: nextPlayLeader, players: players)
+			def cardsLead = nextPlayLeader.startRound()
 
-			def winner = trick.play()
+			def move = Move.fromCards(cardsLead)
 
-			println "$trick was won by $winner"
+			def round = Round.fromMove(move, players, nextPlayLeader)
+
+			def winner = round.play()
+
+			println "$round was won by $winner"
 
 			nextPlayLeader = winner
         }
