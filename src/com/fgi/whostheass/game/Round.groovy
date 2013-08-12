@@ -41,7 +41,7 @@ class Round {
 
 	def getPlayerMove(currentPlayer) {
 
-		currentPlayer.playNormalRound(
+		Move._moveForCards currentPlayer.playNormalRound(
 			getPlayersWhoHavePlayed(currentPlayer),
 			moves,
 			getPlayersStillToPlay(currentPlayer)

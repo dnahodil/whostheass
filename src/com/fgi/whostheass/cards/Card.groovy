@@ -5,9 +5,6 @@ import static com.fgi.whostheass.game.Rules.getNumberOfJokersInDeck
 
 public enum Card {
 
-    Ass(20),
-    Joker(14),
-
     One(1),
     Two(2),
     Three(3),
@@ -20,7 +17,11 @@ public enum Card {
     Ten(10),
     Eleven(11),
     Twelve(12),
-    Thirteen(13)
+    Thirteen(13),
+
+	Joker(14),
+
+	Ass(20)
 
     def points
 
