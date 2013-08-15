@@ -8,6 +8,24 @@ class Pass extends Move {
 	@Override
 	boolean canPlayOn(Round round) {
 
-		return !(round instanceof AssRound)
+		!(round instanceof AssRound)
+	}
+
+	@Override
+	boolean canWin() {
+
+		return false
+	}
+
+	@Override
+	def canLead() {
+
+		false
+	}
+
+	@Override
+	public String toString() {
+
+		"Pass"
 	}
 }

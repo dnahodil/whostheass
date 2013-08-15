@@ -44,6 +44,21 @@ class Player {
 		sortCards()
     }
 
+	void useCards(cardsUsed) {
+
+		println "cards - $cards"
+		println "cardsUsed - $cardsUsed"
+
+		cardsUsed.each{
+
+			if (!cards.contains(it)) throw new IllegalStateException("$this cannot use card $it as it is not present in $cards")
+
+			cards - it
+		}
+
+		println "cards - $cards"
+	}
+
 	def hasTheAss() {
 
 		cards.find{ it == Card.Ass } as boolean
@@ -70,6 +85,6 @@ class Player {
     @Override
     public String toString() {
 
-        return "Player ${('A'..'Z')[id]}"
+        return "Player " + ('A'..'Z')[id]
     }
 }

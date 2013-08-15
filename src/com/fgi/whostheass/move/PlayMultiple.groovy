@@ -9,4 +9,16 @@ class PlayMultiple extends Move {
 
 		return (round.moves.first() instanceof PlayMultiple)
 	}
+
+	@Override
+	boolean canWin() {
+
+		true
+	}
+
+	@Override
+	public String toString() {
+
+		"Play multiple cards"
+	}
 }

@@ -10,4 +10,22 @@ class PlayJokerOnAss extends Move {
 
 		return round instanceof AssRound
 	}
+
+	@Override
+	boolean canWin() {
+
+		return true
+	}
+
+	@Override
+	def canLead() {
+
+		false
+	}
+
+	@Override
+	public String toString() {
+
+		"Play Joker The Ass"
+	}
 }

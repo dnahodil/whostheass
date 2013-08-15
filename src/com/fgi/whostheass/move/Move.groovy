@@ -6,13 +6,22 @@ import com.fgi.whostheass.game.Round
 abstract class Move {
 
 	def cards
+	def player
 	abstract boolean canPlayOn(Round round)
+	abstract boolean canWin()
 
-	static def fromCards(cards) {
+	def canLead() {
+
+		true
+	}
+
+	static def from(player, cards) {
+
+		println "$player played $cards"
 
 		if (!validPlay(cards)) throw new InvalidMoveException("It is not a valid move to play these cards: $cards")
 
-		_moveForCards(cards)
+		_moveFor(player, cards)
 	}
 
 	static def validPlay(cards) {
@@ -59,17 +68,24 @@ abstract class Move {
 		return allSame
 	}
 
-	static def _moveForCards(cards) {
+	static def _moveFor(player, cards) {
+
+		def args = [
+			player: player,
+			cards: cards
+		]
 
 		switch(cards.size()) {
 			case 0:
-				return new Pass()
+				return new Pass(args)
 
 			case 1:
-				return _containsAss(cards) ? new LeadAss() : new PlaySingle(cards: cards)
+				return _containsAss(cards) ?
+					new LeadAss(args) :
+					new PlaySingle(args)
 
 			default:
-				return new PlayMultiple(cards: cards)
+				return new PlayMultiple(args)
 		}
 	}
 }

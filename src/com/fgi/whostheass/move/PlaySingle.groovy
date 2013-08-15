@@ -9,4 +9,16 @@ class PlaySingle extends Move {
 
 		return (round.moves.first() instanceof PlaySingle)
 	}
+
+	@Override
+	boolean canWin() {
+
+		true
+	}
+
+	@Override
+	public String toString() {
+
+		"Play single card"
+	}
 }

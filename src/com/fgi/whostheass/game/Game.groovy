@@ -28,20 +28,27 @@ class Game {
             players << new Player(strategy: it)
         }
 
-		Collections.shuffle players
+		Collections.shuffle players // Random seating order
     }
 
     def play() {
 
 		def nextPlayLeader = players.find{ it.hasTheAss() }
 
+		println "nextPlayLeader = $nextPlayLeader"
+		println "players = $players"
+
+		players = playersStartingWith(nextPlayLeader)
+
+		println "players = $players"
+
 		while (nextPlayLeader.cards.size()) {
 
 			def cardsLead = nextPlayLeader.startRound()
 
-			def move = Move.fromCards(cardsLead)
+			def move = Move.from(nextPlayLeader, cardsLead)
 
-			def round = Round.fromMove(move, players, nextPlayLeader)
+			def round = Round.from(move, players)
 
 			def winner = round.play()
 
@@ -59,5 +66,12 @@ class Game {
 	def getPlayersInOrderAdded() {
 
 		players.sort{ it.id }
+	}
+
+	def playersStartingWith(playStarter) {
+
+		def idx = players.indexOf(playStarter)
+
+		idx == 0 ? players : players[idx..-1] + players[0..idx-1]
 	}
 }

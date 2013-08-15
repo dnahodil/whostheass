@@ -2,13 +2,13 @@ package com.fgi.whostheass.game
 
 class AssRound extends Round {
 
-	AssRound(createdOrder, firstMove, players, playLeader) {
+	AssRound(createdOrder, firstMove, players) {
 
-		super(createdOrder, firstMove, players, playLeader)
+		super(createdOrder, firstMove, players)
 	}
 
 	@Override
-	def getPlayerMove(player) {
+	def getPlayedCards(player) {
 
 		player.playAssRound(playersWhoHavePlayed, moves, playersStillToPlay)
 	}

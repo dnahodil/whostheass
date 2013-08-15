@@ -11,28 +11,28 @@ class Round {
 	def players
 	def moves = []
 
-	def Round(createdOrder, firstMove, players, playLeader) {
+	def Round(createdOrder, firstMove, players) {
 
 		id = createdOrder
 
+		if (!firstMove.canLead()) throw new InvalidMoveException("Cannot lead with $move")
+
 		moves << firstMove
 		this.players = players
-		this.playLeader = playLeader
+		this.playLeader = players.first()
 	}
 
 	def play() {
 
 		players.each {
 
-			def move = getPlayerMove(it)
+			if (it != playLeader) { // Play leader has played already
 
-			if (move.canPlayOn(this)) {
+				def move = getPlayerMove(it)
+
+				if (!move.canPlayOn(this)) throw new InvalidMoveException("Can't play $move on $this")
 
 				moves << move
-			}
-			else {
-
-				throw new InvalidMoveException("Can't play $move on $this")
 			}
 		}
 
@@ -41,7 +41,19 @@ class Round {
 
 	def getPlayerMove(currentPlayer) {
 
-		Move._moveForCards currentPlayer.playNormalRound(
+		def cardsPlayed = getPlayedCards(currentPlayer)
+
+		currentPlayer.useCards(cardsPlayed)
+
+		Move.from(
+			currentPlayer,
+			cardsPlayed
+		)
+	}
+
+	def getPlayedCards(currentPlayer) {
+
+		currentPlayer.playNormalRound(
 			getPlayersWhoHavePlayed(currentPlayer),
 			moves,
 			getPlayersStillToPlay(currentPlayer)
@@ -60,29 +72,29 @@ class Round {
 
 	def getWinner() {
 
-		moves.last().player
+		moves.findAll{ it.canWin() }.last().player
 	}
 
 	@Override
 	public String toString() {
 
-		"Round #$id"
+		"Round #$id. " + moves*.cards.join(" > ")
 	}
 
-	static def fromMove(leadMove, players, playLeader) {
+	static def from(leadMove, players) {
 
 		trickCount++
 
 		switch(leadMove.class) {
 
 			case LeadAss:
-				return new AssRound(trickCount, leadMove, players, playLeader)
+				return new AssRound(trickCount, leadMove, players)
 
 			case Pass: PlayJokerOnAss:
 				throw new InvalidMoveException("Cannot lead by passing or playing Joker on the Ass")
 
 			default:
-				return new Round(trickCount, leadMove, players, playLeader)
+				return new Round(trickCount, leadMove, players)
 		}
 	}
 }
