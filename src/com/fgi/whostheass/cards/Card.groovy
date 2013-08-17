@@ -33,7 +33,7 @@ public enum Card {
     @Override
     public String toString() {
 
-        this == Ass ? "[The Ass]" : name()
+        this == Ass ? "{The Ass}" : name()
     }
 
 	static def getJokers() {

@@ -15,10 +15,4 @@ class PlayMultiple extends Move {
 
 		true
 	}
-
-	@Override
-	public String toString() {
-
-		"Play multiple cards"
-	}
 }

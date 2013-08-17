@@ -18,20 +18,12 @@ class AssRound extends Round {
 
 		def lastMax
 
-		moves[1..-1].each {
+		moves.tail().each {
 
-			println it
-
-			if (it.card.value.points >= lastMax.card.value.points)
+			if (!lastMax || it.card.points >= lastMax.card.points)
 				lastMax = it
 		}
 
-		println "Winner is $lastMax"
-	}
-
-	@Override
-	public String toString() {
-
-		"Round #$id (Ass played)"
+		return lastMax.player
 	}
 }

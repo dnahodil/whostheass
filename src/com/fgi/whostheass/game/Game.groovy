@@ -17,15 +17,17 @@ class Game {
         initPlayers(playerStrategies)
 
         new Deck().deal(players)
+
+		def playerWithAss = players.find{ it.hasTheAss() }
+
+		sortPlayersStaringWith(playerWithAss)
     }
 
     def initPlayers(playerStrategies) {
 
-        players = []
+        players = playerStrategies.collect {
 
-        playerStrategies.each {
-
-            players << new Player(strategy: it)
+            new Player(strategy: it)
         }
 
 		Collections.shuffle players // Random seating order
@@ -33,28 +35,13 @@ class Game {
 
     def play() {
 
-		def nextPlayLeader = players.find{ it.hasTheAss() }
+		while (!playerHasGoneOut()) {
 
-		println "nextPlayLeader = $nextPlayLeader"
-		println "players = $players"
-
-		players = playersStartingWith(nextPlayLeader)
-
-		println "players = $players"
-
-		while (nextPlayLeader.cards.size()) {
-
-			def cardsLead = nextPlayLeader.startRound()
-
-			def move = Move.from(nextPlayLeader, cardsLead)
-
-			def round = Round.from(move, players)
+			def round = Round.forPlayers(players)
 
 			def winner = round.play()
 
-			println "$round was won by $winner"
-
-			nextPlayLeader = winner
+			println "$round. Won by $winner."
         }
 
 		playersInOrderAdded.each {
@@ -63,15 +50,19 @@ class Game {
 		}
     }
 
+	def playerHasGoneOut() {
+
+		players.find{ it.cards.size() == 0 }
+	}
+
 	def getPlayersInOrderAdded() {
 
 		players.sort{ it.id }
 	}
 
-	def playersStartingWith(playStarter) {
+	void sortPlayersStaringWith(playStarter) {
 
-		def idx = players.indexOf(playStarter)
-
-		idx == 0 ? players : players[idx..-1] + players[0..idx-1]
+		players = players.dropWhile{ it != playStarter } +
+			      players.takeWhile{ it != playStarter }
 	}
 }

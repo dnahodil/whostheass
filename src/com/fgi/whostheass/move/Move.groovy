@@ -17,11 +17,13 @@ abstract class Move {
 
 	static def from(player, cards) {
 
-		println "$player played $cards"
-
 		if (!validPlay(cards)) throw new InvalidMoveException("It is not a valid move to play these cards: $cards")
 
-		_moveFor(player, cards)
+		def move = _moveFor(player, cards)
+
+		player.useCards(cards)
+
+		return move
 	}
 
 	static def validPlay(cards) {
@@ -87,5 +89,12 @@ abstract class Move {
 			default:
 				return new PlayMultiple(args)
 		}
+	}
+
+
+	@Override
+	public String toString() {
+
+		"$player played $cards"
 	}
 }

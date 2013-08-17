@@ -46,17 +46,13 @@ class Player {
 
 	void useCards(cardsUsed) {
 
-		println "cards - $cards"
-		println "cardsUsed - $cardsUsed"
-
 		cardsUsed.each{
+			cardPlayed ->
 
-			if (!cards.contains(it)) throw new IllegalStateException("$this cannot use card $it as it is not present in $cards")
+			if (!cards.contains(cardPlayed)) throw new IllegalStateException("$this cannot use card $cardPlayed as it is not present in $cards")
 
-			cards - it
+			cards = cards - cardPlayed
 		}
-
-		println "cards - $cards"
 	}
 
 	def hasTheAss() {
@@ -85,6 +81,6 @@ class Player {
     @Override
     public String toString() {
 
-        return "Player " + ('A'..'Z')[id]
+        "Player " + ('A'..'Z')[id]
     }
 }

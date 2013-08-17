@@ -4,7 +4,7 @@ import com.fgi.whostheass.move.*
 
 class Round {
 
-	static def trickCount = 0
+	static def roundCount = 0
 
 	def id
 	def playLeader
@@ -24,16 +24,13 @@ class Round {
 
 	def play() {
 
-		players.each {
+		players.tail().each { // First player has made their move already
 
-			if (it != playLeader) { // Play leader has played already
+			def move = getPlayerMove(it)
 
-				def move = getPlayerMove(it)
+			if (!move.canPlayOn(this)) throw new InvalidMoveException("Can't $move on $this")
 
-				if (!move.canPlayOn(this)) throw new InvalidMoveException("Can't play $move on $this")
-
-				moves << move
-			}
+			moves << move
 		}
 
 		return winner
@@ -42,8 +39,6 @@ class Round {
 	def getPlayerMove(currentPlayer) {
 
 		def cardsPlayed = getPlayedCards(currentPlayer)
-
-		currentPlayer.useCards(cardsPlayed)
 
 		Move.from(
 			currentPlayer,
@@ -54,18 +49,18 @@ class Round {
 	def getPlayedCards(currentPlayer) {
 
 		currentPlayer.playNormalRound(
-			getPlayersWhoHavePlayed(currentPlayer),
+			playersWhoHavePlayed,
 			moves,
-			getPlayersStillToPlay(currentPlayer)
+			playersStillToPlay
 		)
 	}
 
-	def getPlayersWhoHavePlayed(currentPlayer) {
+	def getPlayersWhoHavePlayed() {
 
 		null
 	}
 
-	def getPlayersStillToPlay(currentPlayer) {
+	def getPlayersStillToPlay() {
 
 		null
 	}
@@ -78,23 +73,31 @@ class Round {
 	@Override
 	public String toString() {
 
-		"Round #$id. " + moves*.cards.join(" > ")
+		"Round #$id. " + moves.join(" > ")
 	}
 
-	static def from(leadMove, players) {
+	static def forPlayers(players) {
 
-		trickCount++
+		roundCount++
 
-		switch(leadMove.class) {
+		def leader = players.first()
+		def playersRemaining = players.tail()
+
+		def move = Move.from(
+			leader,
+			leader.startRound(playersRemaining)
+		)
+
+		switch(move.class) {
 
 			case LeadAss:
-				return new AssRound(trickCount, leadMove, players)
+				return new AssRound(roundCount, move, players)
 
 			case Pass: PlayJokerOnAss:
 				throw new InvalidMoveException("Cannot lead by passing or playing Joker on the Ass")
 
 			default:
-				return new Round(trickCount, leadMove, players)
+				return new Round(roundCount, move, players)
 		}
 	}
 }

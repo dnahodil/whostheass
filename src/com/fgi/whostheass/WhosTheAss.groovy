@@ -11,6 +11,7 @@ class WhosTheAss {
 			[
 				new TerribleStrategy(),
 				new TerribleStrategy(),
+				new TerribleStrategy(),
 				new TerribleStrategy()
 			]
         ).play()

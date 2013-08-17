@@ -5,6 +5,8 @@ import com.fgi.whostheass.game.Round
 
 class PlayJokerOnAss extends Move {
 
+	def jokerValue
+
 	@Override
 	boolean canPlayOn(Round round) {
 
@@ -26,6 +28,6 @@ class PlayJokerOnAss extends Move {
 	@Override
 	public String toString() {
 
-		"Play Joker The Ass"
+		"$player played $cards as a $jokerValue"
 	}
 }

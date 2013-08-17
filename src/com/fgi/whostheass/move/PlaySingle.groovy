@@ -4,21 +4,25 @@ import com.fgi.whostheass.game.Round
 
 class PlaySingle extends Move {
 
+	def getCard() {
+
+		return cards.first()
+	}
+
 	@Override
 	boolean canPlayOn(Round round) {
 
-		return (round.moves.first() instanceof PlaySingle)
+		def firstMove = round.moves.first()
+
+		return (
+			firstMove instanceof PlaySingle ||
+			firstMove instanceof LeadAss
+		)
 	}
 
 	@Override
 	boolean canWin() {
 
 		true
-	}
-
-	@Override
-	public String toString() {
-
-		"Play single card"
 	}
 }

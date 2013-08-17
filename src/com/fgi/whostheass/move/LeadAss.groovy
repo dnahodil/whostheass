@@ -15,10 +15,4 @@ class LeadAss extends Move {
 
 		return false
 	}
-
-	@Override
-	public String toString() {
-
-		"Lead The Ass"
-	}
 }
