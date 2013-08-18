@@ -1,13 +1,17 @@
 package com.fgi.whostheass.move
 
-import static com.fgi.whostheass.cards.Card.*
 import com.fgi.whostheass.game.Round
+
+import static com.fgi.whostheass.cards.Card.Ass
+import static com.fgi.whostheass.cards.Card.Joker
 
 abstract class Move {
 
 	def cards
 	def player
+
 	abstract boolean canPlayOn(Round round)
+
 	abstract boolean canWin()
 
 	def canLead() {
@@ -29,12 +33,12 @@ abstract class Move {
 	static def validPlay(cards) {
 
 		_assIsAlone(cards) &&
-		_areAllSameValue(cards)
+			_areAllSameValue(cards)
 	}
 
 	static def _containsAss(cards) {
 
-		cards.find{it == Ass}
+		cards.find { it == Ass }
 	}
 
 	static def _assIsAlone(cards) {
@@ -57,8 +61,7 @@ abstract class Move {
 			if (!firstValue) {
 
 				firstValue = it
-			}
-			else {
+			} else {
 
 				if (it != firstValue && it != Joker) {
 
@@ -77,7 +80,7 @@ abstract class Move {
 			cards: cards
 		]
 
-		switch(cards.size()) {
+		switch (cards.size()) {
 			case 0:
 				return new Pass(args)
 

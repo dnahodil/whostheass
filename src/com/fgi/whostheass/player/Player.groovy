@@ -4,16 +4,16 @@ import com.fgi.whostheass.cards.Card
 
 class Player {
 
-    static def playerCount = 0
+	static def playerCount = 0
 
-    def id
-    def strategy
+	def id
+	def strategy
 	def cards = []
 
-    Player() {
+	Player() {
 
-        id = playerCount++
-    }
+		id = playerCount++
+	}
 
 	def playNormalRound(playersWhoHavePlayed, movesPlayed, playersStillToPlay) {
 
@@ -30,34 +30,34 @@ class Player {
 		strategy.startRound(cards, playersStillToPlay)
 	}
 
-    def dealCard(card) {
+	def dealCard(card) {
 
-        cards << card
+		cards << card
 		sortCards()
-    }
+	}
 
-    def pickUpCards(cards) {
+	def pickUpCards(cards) {
 
-        println "$this picked up $cards"
+		println "$this picked up $cards"
 
-        cards.addAll cards
+		cards.addAll cards
 		sortCards()
-    }
+	}
 
 	void useCards(cardsUsed) {
 
-		cardsUsed.each{
+		cardsUsed.each {
 			cardPlayed ->
 
-			if (!cards.contains(cardPlayed)) throw new IllegalStateException("$this cannot use card $cardPlayed as it is not present in $cards")
+				if (!cards.contains(cardPlayed)) throw new IllegalStateException("$this cannot use card $cardPlayed as it is not present in $cards")
 
-			cards = cards - cardPlayed
+				cards = cards - cardPlayed
 		}
 	}
 
 	def hasTheAss() {
 
-		cards.find{ it == Card.Ass } as boolean
+		cards.find { it == Card.Ass } as boolean
 	}
 
 	def viewOfHand() {
@@ -70,17 +70,17 @@ class Player {
 
 	def sortCards() {
 
-		cards = cards.sort{ it.points }
+		cards = cards.sort { it.points }
 	}
 
 	def getPoints() {
 
-		cards ? cards.sum{ it.points } : 0
+		cards ? cards.sum { it.points } : 0
 	}
 
-    @Override
-    public String toString() {
+	@Override
+	public String toString() {
 
-        "Player " + ('A'..'Z')[id]
-    }
+		"Player " + ('A'..'Z')[id]
+	}
 }

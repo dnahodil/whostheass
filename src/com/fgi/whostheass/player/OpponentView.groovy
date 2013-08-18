@@ -2,8 +2,8 @@ package com.fgi.whostheass.player
 
 class OpponentView {
 
-    int numberOfCards
-    boolean includesTheAss
+	int numberOfCards
+	boolean includesTheAss
 
 	String playerName
 

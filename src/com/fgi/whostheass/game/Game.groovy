@@ -1,39 +1,39 @@
 package com.fgi.whostheass.game
 
 import com.fgi.whostheass.cards.Deck
-import com.fgi.whostheass.move.Move
 import com.fgi.whostheass.player.Player
-import static com.fgi.whostheass.game.Rules.*
+
+import static com.fgi.whostheass.game.Rules.getValidNumberOfPlayers
 
 class Game {
 
-    def players
+	def players
 
-    Game(playerStrategies) {
+	Game(playerStrategies) {
 
-        if (!validNumberOfPlayers.contains(playerStrategies.size()))
-            throw new IllegalStateException("Must have $validNumberOfPlayers Players. Tried to play game with ${playerStrategies.size()}.")
+		if (!validNumberOfPlayers.contains(playerStrategies.size()))
+			throw new IllegalStateException("Must have $validNumberOfPlayers Players. Tried to play game with ${playerStrategies.size()}.")
 
-        initPlayers(playerStrategies)
+		initPlayers(playerStrategies)
 
-        new Deck().deal(players)
+		new Deck().deal(players)
 
-		def playerWithAss = players.find{ it.hasTheAss() }
+		def playerWithAss = players.find { it.hasTheAss() }
 
 		sortPlayersStaringWith(playerWithAss)
-    }
+	}
 
-    def initPlayers(playerStrategies) {
+	def initPlayers(playerStrategies) {
 
-        players = playerStrategies.collect {
+		players = playerStrategies.collect {
 
-            new Player(strategy: it)
-        }
+			new Player(strategy: it)
+		}
 
 		Collections.shuffle players // Random seating order
-    }
+	}
 
-    def play() {
+	def play() {
 
 		while (!playerHasGoneOut()) {
 
@@ -42,27 +42,27 @@ class Game {
 			def winner = round.play()
 
 			println "$round. Won by $winner."
-        }
+		}
 
 		playersInOrderAdded.each {
 
 			println "$it finished with ${it.points} points"
 		}
-    }
+	}
 
 	def playerHasGoneOut() {
 
-		players.find{ it.cards.size() == 0 }
+		players.find { it.cards.size() == 0 }
 	}
 
 	def getPlayersInOrderAdded() {
 
-		players.sort{ it.id }
+		players.sort { it.id }
 	}
 
 	void sortPlayersStaringWith(playStarter) {
 
-		players = players.dropWhile{ it != playStarter } +
-			      players.takeWhile{ it != playStarter }
+		players = players.dropWhile { it != playStarter } +
+			players.takeWhile { it != playStarter }
 	}
 }

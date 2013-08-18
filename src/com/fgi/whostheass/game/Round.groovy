@@ -1,6 +1,9 @@
 package com.fgi.whostheass.game
 
-import com.fgi.whostheass.move.*
+import com.fgi.whostheass.move.InvalidMoveException
+import com.fgi.whostheass.move.LeadAss
+import com.fgi.whostheass.move.Move
+import com.fgi.whostheass.move.Pass
 import com.fgi.whostheass.player.OpponentView
 
 class Round {
@@ -28,7 +31,7 @@ class Round {
 	def loadPlayerViews() {
 
 		playersWhoHavePlayedViews << new OpponentView(playLeader)
-		remainingPlayers.each{ playersStillToPlayViews << new OpponentView(it) }
+		remainingPlayers.each { playersStillToPlayViews << new OpponentView(it) }
 	}
 
 	def play() {
@@ -45,7 +48,7 @@ class Round {
 		}
 
 		return winner
-    }
+	}
 
 	def getPlayerMove(currentPlayer) {
 
@@ -91,7 +94,7 @@ class Round {
 
 	def getWinner() {
 
-		moves.findAll{ it.canWin() }.last().player
+		moves.findAll { it.canWin() }.last().player
 	}
 
 	@Override
@@ -112,13 +115,13 @@ class Round {
 
 		if (!firstMove.canLead()) throw new InvalidMoveException("Cannot lead with $firstMove")
 
-		switch(firstMove.class) {
+		switch (firstMove.class) {
 
 			case LeadAss:
 				return new AssRound(firstMove, players)
 
 			case Pass: PlayJokerOnAss:
-				throw new InvalidMoveException("Cannot lead by passing or playing Joker on the Ass")
+			throw new InvalidMoveException("Cannot lead by passing or playing Joker on the Ass")
 
 			default:
 				return new Round(firstMove, players)

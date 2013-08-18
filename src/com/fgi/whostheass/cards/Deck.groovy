@@ -1,53 +1,53 @@
 package com.fgi.whostheass.cards
 
-import static com.fgi.whostheass.game.Rules.*
+import static com.fgi.whostheass.game.Rules.getNumberOfCardsInHand
 
 class Deck {
 
-    def cards = [] as LinkedList
+	def cards = [] as LinkedList
 
-    Deck() {
+	Deck() {
 
-        cards.addAll Card.jokers
-        cards.addAll Card.numberCards
-        // We only add The Ass once we know how many Players we're dealing to
+		cards.addAll Card.jokers
+		cards.addAll Card.numberCards
+		// We only add The Ass once we know how many Players we're dealing to
 
-        Collections.shuffle cards
-    }
+		Collections.shuffle cards
+	}
 
-    void deal(players) {
+	void deal(players) {
 
-        def numPlayers = players.size()
-        def numCardsBeingDealt = numPlayers * numberOfCardsInHand
+		def numPlayers = players.size()
+		def numCardsBeingDealt = numPlayers * numberOfCardsInHand
 
-        insertAss randomLocationFor(numCardsBeingDealt)
+		insertAss randomLocationFor(numCardsBeingDealt)
 
-        while (players.first().cards.size() < numberOfCardsInHand) {
+		while (players.first().cards.size() < numberOfCardsInHand) {
 
-            players.each {
+			players.each {
 
-                it.dealCard nextCard
-            }
-        }
+				it.dealCard nextCard
+			}
+		}
 
-        players.each {
+		players.each {
 
-            println "$it has these Cards: ${it.cards}"
-        }
-    }
+			println "$it has these Cards: ${it.cards}"
+		}
+	}
 
-    void insertAss(location) {
+	void insertAss(location) {
 
-        cards.add location, Card.Ass
-    }
+		cards.add location, Card.Ass
+	}
 
-    def randomLocationFor(numCardsBeingDealt) {
+	def randomLocationFor(numCardsBeingDealt) {
 
-        new Random().nextInt(numCardsBeingDealt)
-    }
+		new Random().nextInt(numCardsBeingDealt)
+	}
 
-    def getNextCard() {
+	def getNextCard() {
 
-        cards.removeFirst()
-    }
+		cards.removeFirst()
+	}
 }

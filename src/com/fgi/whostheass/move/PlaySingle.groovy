@@ -15,7 +15,7 @@ class PlaySingle extends Move {
 		def firstMove = round.moves.first()
 
 		return (
-			firstMove instanceof PlaySingle ||
+		firstMove instanceof PlaySingle ||
 			firstMove instanceof LeadAss
 		)
 	}
