@@ -1,19 +1,18 @@
 package com.fgi.whostheass.strategy
 
 import com.fgi.whostheass.cards.Card
-import com.fgi.whostheass.move.Move
 import com.fgi.whostheass.player.OpponentView
 
 class TerribleStrategy implements PlayStrategy {
 
 	@Override
-	List<Card> playNormalRound(List<Card> cardsInHand, List<OpponentView> playersWhovePlayed, List<Move> movesPlayed, List<OpponentView> playersStillToPlay) {
+	List<Card> playNormalRound(List<Card> cardsInHand, List<OpponentView> playersWhovePlayed, List<List<Card>> movesPlayed, List<OpponentView> playersStillToPlay) {
 
 		return [] // Pass
 	}
 
 	@Override
-	List<Card> playAssRound(List<Card> cardsInHand, List<OpponentView> playersWhovePlayed, List<Move> movesPlayed, List<OpponentView> playersStillToPlay) {
+	List<Card> playAssRound(List<Card> cardsInHand, List<OpponentView> playersWhovePlayed, List<List<Card>> movesPlayed, List<OpponentView> playersStillToPlay) {
 
 		return [cardsInHand.last()] // Play highest value card
 	}
