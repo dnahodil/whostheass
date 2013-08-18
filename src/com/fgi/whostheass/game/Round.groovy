@@ -1,36 +1,47 @@
 package com.fgi.whostheass.game
 
 import com.fgi.whostheass.move.*
+import com.fgi.whostheass.player.OpponentView
 
 class Round {
 
 	static def roundCount = 0
 
 	def id
-	def playLeader
-	def players
+	def allPlayers
+	def playersWhoHavePlayedViews = []
+	def currentPlayerView
+	def playersStillToPlayViews = []
 	def moves = []
 
-	def Round(createdOrder, firstMove, players) {
+	def Round(firstMove, players) {
 
-		id = createdOrder
+		id = roundCount++
 
-		if (!firstMove.canLead()) throw new InvalidMoveException("Cannot lead with $move")
+		allPlayers = players
 
-		moves << firstMove
-		this.players = players
-		this.playLeader = players.first()
+		loadPlayerViews()
+
+		playMove firstMove
+	}
+
+	def loadPlayerViews() {
+
+		playersWhoHavePlayedViews << new OpponentView(playLeader)
+		remainingPlayers.each{ playersStillToPlayViews << new OpponentView(it) }
 	}
 
 	def play() {
 
-		players.tail().each { // First player has made their move already
+		remainingPlayers.each {
+
+			updatePlayerViews()
 
 			def move = getPlayerMove(it)
 
 			if (!move.canPlayOn(this)) throw new InvalidMoveException("Can't $move on $this")
 
-			moves << move
+			playMove move
 		}
 
 		return winner
@@ -46,23 +57,36 @@ class Round {
 		)
 	}
 
+	void updatePlayerViews() {
+
+		if (currentPlayerView) playersWhoHavePlayedViews << currentPlayerView
+
+		currentPlayerView = playersStillToPlayViews.first()
+		playersStillToPlayViews = playersStillToPlayViews.drop(1)
+	}
+
+	void playMove(move) {
+
+		moves << move
+	}
+
+	def getPlayLeader() {
+
+		allPlayers.first()
+	}
+
+	def getRemainingPlayers() {
+
+		allPlayers.tail()
+	}
+
 	def getPlayedCards(currentPlayer) {
 
 		currentPlayer.playNormalRound(
-			playersWhoHavePlayed,
+			playersWhoHavePlayedViews,
 			moves,
-			playersStillToPlay
+			playersStillToPlayViews
 		)
-	}
-
-	def getPlayersWhoHavePlayed() {
-
-		null
-	}
-
-	def getPlayersStillToPlay() {
-
-		null
 	}
 
 	def getWinner() {
@@ -78,26 +102,26 @@ class Round {
 
 	static def forPlayers(players) {
 
-		roundCount++
-
 		def leader = players.first()
 		def playersRemaining = players.tail()
 
-		def move = Move.from(
+		def firstMove = Move.from(
 			leader,
 			leader.startRound(playersRemaining)
 		)
 
-		switch(move.class) {
+		if (!firstMove.canLead()) throw new InvalidMoveException("Cannot lead with $firstMove")
+
+		switch(firstMove.class) {
 
 			case LeadAss:
-				return new AssRound(roundCount, move, players)
+				return new AssRound(firstMove, players)
 
 			case Pass: PlayJokerOnAss:
 				throw new InvalidMoveException("Cannot lead by passing or playing Joker on the Ass")
 
 			default:
-				return new Round(roundCount, move, players)
+				return new Round(firstMove, players)
 		}
 	}
 }

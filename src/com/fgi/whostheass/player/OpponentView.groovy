@@ -5,12 +5,22 @@ class OpponentView {
     int numberOfCards
     boolean includesTheAss
 
+	String playerName
+
+	def OpponentView(player) {
+
+		playerName = "$player"
+
+		numberOfCards = player.cards.size()
+		includesTheAss = player.hasTheAss()
+	}
+
 	@Override
 	public String toString() {
 
 		def cardsInfo = "$numberOfCards in hand"
-		def assInfo = includesTheAss ? " including The Ass" : ""
+		def assInfo = includesTheAss ? "including The Ass" : ""
 
-		cardsInfo + assInfo
+		"(View of $playerName - $cardsInfo $assInfo)"
 	}
 }
