@@ -41,13 +41,13 @@ class Deck {
 		cards.add location, Card.Ass
 	}
 
-	def randomLocationFor(numCardsBeingDealt) {
-
-		new Random().nextInt(numCardsBeingDealt)
-	}
-
 	def getNextCard() {
 
 		cards.removeFirst()
+	}
+
+	static def randomLocationFor(numCardsBeingDealt) {
+
+		new Random().nextInt(numCardsBeingDealt)
 	}
 }
