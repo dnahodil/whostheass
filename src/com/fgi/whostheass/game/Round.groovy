@@ -4,7 +4,7 @@ import com.fgi.whostheass.move.InvalidMoveException
 import com.fgi.whostheass.move.LeadAss
 import com.fgi.whostheass.move.Move
 import com.fgi.whostheass.move.Pass
-import com.fgi.whostheass.player.OpponentView
+import com.fgi.whostheass.player.OpponentViewImpl
 
 class Round {
 
@@ -30,8 +30,8 @@ class Round {
 
 	def loadPlayerViews() {
 
-		playersWhoHavePlayedViews << new OpponentView(playLeader)
-		remainingPlayers.each { playersStillToPlayViews << new OpponentView(it) }
+		playersWhoHavePlayedViews << new OpponentViewImpl(playLeader)
+		remainingPlayers.each { playersStillToPlayViews << new OpponentViewImpl(it) }
 	}
 
 	def play() {

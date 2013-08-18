@@ -1,6 +1,6 @@
 package com.fgi.whostheass.player
 
-import com.fgi.whostheass.cards.Card
+import static com.fgi.whostheass.cards.CardImpl.*
 
 class Player {
 
@@ -57,15 +57,7 @@ class Player {
 
 	def hasTheAss() {
 
-		cards.find { it == Card.Ass } as boolean
-	}
-
-	def viewOfHand() {
-
-		new OpponentView(
-			numberOfCards: cards.size(),
-			includesTheAss: hasTheAss()
-		)
+		cards.find{ it == Ass } as boolean
 	}
 
 	def sortCards() {

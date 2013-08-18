@@ -1,13 +1,13 @@
 package com.fgi.whostheass.player
 
-class OpponentView {
+class OpponentViewImpl implements OpponentView {
 
 	int numberOfCards
 	boolean includesTheAss
 
 	String playerName
 
-	OpponentView(player) {
+	OpponentViewImpl(player) {
 
 		playerName = "$player"
 

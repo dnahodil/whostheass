@@ -1,6 +1,7 @@
 package com.fgi.whostheass.cards
 
 import static com.fgi.whostheass.game.Rules.getNumberOfCardsInHand
+import static com.fgi.whostheass.cards.CardImpl.*
 
 class Deck {
 
@@ -8,8 +9,8 @@ class Deck {
 
 	Deck() {
 
-		cards.addAll Card.jokers
-		cards.addAll Card.numberCards
+		cards.addAll jokers
+		cards.addAll numberCards
 		// We only add The Ass once we know how many Players we're dealing to
 
 		Collections.shuffle cards
@@ -38,7 +39,7 @@ class Deck {
 
 	void insertAss(location) {
 
-		cards.add location, Card.Ass
+		cards.add location, Ass
 	}
 
 	def getNextCard() {

@@ -2,8 +2,7 @@ package com.fgi.whostheass.move
 
 import com.fgi.whostheass.game.Round
 
-import static com.fgi.whostheass.cards.Card.Ass
-import static com.fgi.whostheass.cards.Card.Joker
+import static com.fgi.whostheass.cards.CardImpl.*
 
 abstract class Move {
 
