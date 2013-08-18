@@ -10,7 +10,7 @@ class Player {
     def strategy
 	def cards = []
 
-    def Player() {
+    Player() {
 
         id = playerCount++
     }

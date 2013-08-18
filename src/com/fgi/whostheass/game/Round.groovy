@@ -14,7 +14,7 @@ class Round {
 	def playersStillToPlayViews = []
 	def moves = []
 
-	def Round(firstMove, players) {
+	Round(firstMove, players) {
 
 		id = roundCount++
 

@@ -7,7 +7,7 @@ class OpponentView {
 
 	String playerName
 
-	def OpponentView(player) {
+	OpponentView(player) {
 
 		playerName = "$player"
 

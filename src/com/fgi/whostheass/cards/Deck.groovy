@@ -6,7 +6,7 @@ class Deck {
 
     def cards = [] as LinkedList
 
-    def Deck() {
+    Deck() {
 
         cards.addAll Card.jokers
         cards.addAll Card.numberCards
