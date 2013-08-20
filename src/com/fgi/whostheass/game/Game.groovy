@@ -18,9 +18,7 @@ class Game {
 
 		new Deck().deal(players)
 
-		def playerWithAss = players.find { it.hasTheAss() }
-
-		sortPlayersStaringWith(playerWithAss)
+		sortPlayersStaringWith playerWithAss
 	}
 
 	def initPlayers(playerStrategies) {
@@ -35,13 +33,15 @@ class Game {
 
 	def play() {
 
-		while (!playerHasGoneOut()) {
+		while (!anyPlayerHasGoneOut) {
 
 			def round = Round.forPlayers(players)
 
 			def winner = round.play()
 
 			println "$round. Won by $winner."
+
+			sortPlayersStaringWith winner
 		}
 
 		playersInOrderAdded.each {
@@ -50,9 +50,14 @@ class Game {
 		}
 	}
 
-	def playerHasGoneOut() {
+	def getAnyPlayerHasGoneOut() {
 
 		players.find { it.cards.size() == 0 }
+	}
+
+	def getPlayerWithAss() {
+
+		players.find { it.hasTheAss() }
 	}
 
 	def getPlayersInOrderAdded() {
@@ -63,6 +68,6 @@ class Game {
 	void sortPlayersStaringWith(playStarter) {
 
 		players = players.dropWhile { it != playStarter } +
-			players.takeWhile { it != playStarter }
+		          players.takeWhile { it != playStarter }
 	}
 }

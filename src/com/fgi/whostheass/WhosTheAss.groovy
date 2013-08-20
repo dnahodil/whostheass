@@ -1,6 +1,7 @@
 package com.fgi.whostheass
 
 import com.fgi.whostheass.game.Game
+import com.fgi.whostheass.strategy.SimpleStrategy
 import com.fgi.whostheass.strategy.TerribleStrategy
 
 class WhosTheAss {
@@ -9,9 +10,8 @@ class WhosTheAss {
 
 		new Game(
 			[
-				new TerribleStrategy(),
-				new TerribleStrategy(),
-				new TerribleStrategy(),
+				new SimpleStrategy(),
+				new SimpleStrategy(),
 				new TerribleStrategy()
 			]
 		).play()

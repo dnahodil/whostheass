@@ -73,6 +73,11 @@ class Round {
 		moves << move
 	}
 
+	def getMovesAsCardArrays() {
+
+		moves.collect{ it.cards }
+	}
+
 	def getPlayLeader() {
 
 		allPlayers.first()
@@ -87,7 +92,7 @@ class Round {
 
 		currentPlayer.playNormalRound(
 			playersWhoHavePlayedViews,
-			moves,
+			movesAsCardArrays,
 			playersStillToPlayViews
 		)
 	}

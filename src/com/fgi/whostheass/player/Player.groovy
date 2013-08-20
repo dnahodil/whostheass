@@ -51,7 +51,7 @@ class Player {
 
 				if (!cards.contains(cardPlayed)) throw new IllegalStateException("$this cannot use card $cardPlayed as it is not present in $cards")
 
-				cards = cards - cardPlayed
+				cards.remove cardPlayed
 		}
 	}
 

@@ -12,7 +12,7 @@ class AssRound extends Round {
 
 		player.playAssRound(
 			playersWhoHavePlayedViews,
-			moves,
+			movesAsCardArrays,
 			playersStillToPlayViews
 		)
 	}
