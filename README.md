@@ -7,3 +7,5 @@ Written in [Groovy](http://groovy.codehaus.org/) but implementations of `PlayStr
 To use this harness you will need to write a class that implements [`PlayStrategy`](https://github.com/dnahodil/whostheass/blob/master/src/com/fgi/whostheass/strategy/PlayStrategy.java). To write your implementations you will need to know about the interfaces [`Card`](https://github.com/dnahodil/whostheass/blob/master/src/com/fgi/whostheass/cards/Card.java) and [`OpponentView`](https://github.com/dnahodil/whostheass/blob/master/src/com/fgi/whostheass/player/OpponentView.java).
 
 Project written in [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/free_java_ide.html).
+
+Doesn't have unit tests (yet?) because I am lazy. :disappointed:
