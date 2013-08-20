@@ -24,7 +24,7 @@ abstract class Move {
 
 		def move = _moveFor(player, cards)
 
-		player.useCards(cards)
+		player.useCards cards
 
 		return move
 	}

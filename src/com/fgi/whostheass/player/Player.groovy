@@ -1,5 +1,7 @@
 package com.fgi.whostheass.player
 
+import com.fgi.whostheass.move.InvalidMoveException
+
 import static com.fgi.whostheass.cards.CardImpl.*
 
 class Player {
@@ -25,22 +27,20 @@ class Player {
 		strategy.playAssRound(cards, playersWhoHavePlayed, movesPlayed, playersStillToPlay)
 	}
 
-	def startRound(playersStillToPlay) {
+	def startRound(playersStillToPlay, canLeadAss) {
 
-		strategy.startRound(cards, playersStillToPlay)
+		strategy.startRound(cards, playersStillToPlay, canLeadAss)
 	}
 
-	def dealCard(card) {
+	void dealCard(card) {
 
 		cards << card
 		sortCards()
 	}
 
-	def pickUpCards(cards) {
+	void pickUpCards(cardsPickedUp) {
 
-		println "$this picked up $cards"
-
-		cards.addAll cards
+		cards.addAll cardsPickedUp
 		sortCards()
 	}
 
@@ -49,9 +49,9 @@ class Player {
 		cardsUsed.each {
 			cardPlayed ->
 
-				if (!cards.contains(cardPlayed)) throw new IllegalStateException("$this cannot use card $cardPlayed as it is not present in $cards")
+			if (!cards.contains(cardPlayed)) throw new InvalidMoveException("$this cannot use card $cardPlayed as it is not present in $cards")
 
-				cards.remove cardPlayed
+			cards.remove cardPlayed
 		}
 	}
 
@@ -62,12 +62,12 @@ class Player {
 
 	def sortCards() {
 
-		cards = cards.sort { it.points }
+		cards = cards.sort{ it.points }
 	}
 
 	def getPoints() {
 
-		cards ? cards.sum { it.points } : 0
+		cards ? cards.sum{ it.points } : 0
 	}
 
 	@Override

@@ -18,7 +18,7 @@ class TerribleStrategy implements PlayStrategy {
 	}
 
 	@Override
-	List<Card> startRound(List<Card> cardsInHand, List<OpponentView> playersStillToPlay) {
+	List<Card> startRound(List<Card> cardsInHand, List<OpponentView> playersStillToPlay, boolean canLeadAss) {
 
 		return [cardsInHand.first()] // Play weakest card
 	}

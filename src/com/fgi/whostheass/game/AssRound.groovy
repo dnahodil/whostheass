@@ -8,6 +8,16 @@ class AssRound extends Round {
 	}
 
 	@Override
+	def play() {
+
+		def winner = super.play()
+
+		winner.pickUpCards allCardsPlayed
+
+		return winner
+	}
+
+	@Override
 	def getPlayedCards(player) {
 
 		player.playAssRound(
@@ -29,5 +39,10 @@ class AssRound extends Round {
 		}
 
 		return lastMax.player
+	}
+
+	def getAllCardsPlayed() {
+
+		moves*.cards.flatten()
 	}
 }

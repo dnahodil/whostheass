@@ -13,9 +13,10 @@ class SimpleStrategy implements PlayStrategy {
 		def moveToBeatCardPoints = moveToBeatCards.first().points
 		def moveToBeatNumberCards = moveToBeatCards.size()
 
-		def cardsHigherThanThosePlayed = cardsInHand.unique().dropWhile{ it.points <= moveToBeatCardPoints }
-
 		def possiblePlays = []
+
+		def distinctValidCards =  nonAssCardsInHand(cardsInHand).unique()
+		def cardsHigherThanThosePlayed = distinctValidCards.dropWhile{ it.points <= moveToBeatCardPoints }
 
 		cardsHigherThanThosePlayed.each{
 			card ->
@@ -26,7 +27,7 @@ class SimpleStrategy implements PlayStrategy {
 			}
 		}
 
-		possiblePlays << [] // Can always Pass
+		possiblePlays << pass // Can always play Pass
 
 		return possiblePlays.first() as List<Card>
 	}
@@ -38,11 +39,26 @@ class SimpleStrategy implements PlayStrategy {
 	}
 
 	@Override
-	List<Card> startRound(List<Card> cardsInHand, List<OpponentView> playersStillToPlay) {
+	List<Card> startRound(List<Card> cardsInHand, List<OpponentView> playersStillToPlay, boolean canLeadAss) {
 
-		if (cardsInHand.find{ it == Ass }) return [Ass]
+		if (canLeadAss && hasAssInHand(cardsInHand)) return [Ass]
 
 		return allCardsWithValue(cardsInHand, cardsInHand.first()) as List<Card>
+	}
+
+	static def getPass() {
+
+		[]
+	}
+
+	static def hasAssInHand(cardsInHand) {
+
+		cardsInHand.find{ it == Ass }
+	}
+
+	static def nonAssCardsInHand(cardsInHand) {
+
+		cardsInHand.findAll{ it != Ass }
 	}
 
 	static def allCardsWithValue(cardsInHand, card) {

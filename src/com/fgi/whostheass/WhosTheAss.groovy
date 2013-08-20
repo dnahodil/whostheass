@@ -12,7 +12,7 @@ class WhosTheAss {
 			[
 				new SimpleStrategy(),
 				new SimpleStrategy(),
-				new TerribleStrategy()
+				new SimpleStrategy()
 			]
 		).play()
 	}

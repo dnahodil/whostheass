@@ -33,15 +33,19 @@ class Game {
 
 	def play() {
 
+		def canLeadAss = true
+
 		while (!anyPlayerHasGoneOut) {
 
-			def round = Round.forPlayers(players)
+			def round = Round.forPlayers(players, canLeadAss)
 
 			def winner = round.play()
 
-			println "$round. Won by $winner."
-
 			sortPlayersStaringWith winner
+			canLeadAss = !(round instanceof AssRound)
+
+			def canLeadAssString = canLeadAss ? "" : " (Can't lead Ass next round)"
+			println "$round. Won by $winner.$canLeadAssString"
 		}
 
 		playersInOrderAdded.each {

@@ -1,5 +1,6 @@
 package com.fgi.whostheass.game
 
+import com.fgi.whostheass.move.InvalidLeadException
 import com.fgi.whostheass.move.InvalidMoveException
 import com.fgi.whostheass.move.LeadAss
 import com.fgi.whostheass.move.Move
@@ -31,7 +32,7 @@ class Round {
 	def loadPlayerViews() {
 
 		playersWhoHavePlayedViews << new OpponentViewImpl(playLeader)
-		remainingPlayers.each { playersStillToPlayViews << new OpponentViewImpl(it) }
+		remainingPlayers.each{ playersStillToPlayViews << new OpponentViewImpl(it) }
 	}
 
 	def play() {
@@ -42,7 +43,7 @@ class Round {
 
 			def move = getPlayerMove(it)
 
-			if (!move.canPlayOn(this)) throw new InvalidMoveException("Can't $move on $this")
+			if (!move.canPlayOn(this)) throw new InvalidMoveException(move, this)
 
 			playMove move
 		}
@@ -65,7 +66,7 @@ class Round {
 		if (currentPlayerView) playersWhoHavePlayedViews << currentPlayerView
 
 		currentPlayerView = playersStillToPlayViews.first()
-		playersStillToPlayViews = playersStillToPlayViews.drop(1)
+		playersStillToPlayViews = playersStillToPlayViews.tail()
 	}
 
 	void playMove(move) {
@@ -99,7 +100,7 @@ class Round {
 
 	def getWinner() {
 
-		moves.findAll { it.canWin() }.last().player
+		moves.findAll{ it.canWin() }.last().player
 	}
 
 	@Override
@@ -108,25 +109,26 @@ class Round {
 		"Round #$id. " + moves.join(" > ")
 	}
 
-	static def forPlayers(players) {
+	static def forPlayers(players, canLeadAss) {
 
 		def leader = players.first()
 		def playersRemaining = players.tail()
 
 		def firstMove = Move.from(
 			leader,
-			leader.startRound(playersRemaining)
+			leader.startRound(playersRemaining, canLeadAss)
 		)
 
-		if (!firstMove.canLead()) throw new InvalidMoveException("Cannot lead with $firstMove")
+		if (!firstMove.canLead()) throw new InvalidLeadException(firstMove)
 
 		switch (firstMove.class) {
 
 			case LeadAss:
+				if (!canLeadAss) throw new InvalidLeadException(firstMove)
 				return new AssRound(firstMove, players)
 
 			case Pass: PlayJokerOnAss:
-			throw new InvalidMoveException("Cannot lead by passing or playing Joker on the Ass")
+				throw new InvalidLeadException(firstMove)
 
 			default:
 				return new Round(firstMove, players)
