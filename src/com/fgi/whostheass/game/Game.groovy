@@ -52,6 +52,8 @@ class Game {
 
 			println "$it finished with ${it.points} points"
 		}
+
+		return players
 	}
 
 	def getAnyPlayerHasGoneOut() {
