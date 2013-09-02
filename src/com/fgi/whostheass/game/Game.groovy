@@ -7,7 +7,7 @@ import static com.fgi.whostheass.game.Rules.getValidNumberOfPlayers
 
 class Game {
 
-	def players
+	def players = []
 
 	Game(playerStrategies) {
 
@@ -23,9 +23,9 @@ class Game {
 
 	def initPlayers(playerStrategies) {
 
-		players = playerStrategies.collect {
+		playerStrategies.each {
 
-			new Player(strategy: it)
+			players << playerFor(it)
 		}
 
 		Collections.shuffle players // Random seating order
@@ -75,5 +75,13 @@ class Game {
 
 		players = players.dropWhile { it != playStarter } +
 		          players.takeWhile { it != playStarter }
+	}
+
+	def playerFor(strategy) {
+
+		new Player(
+			id: players.size(),
+			strategy: strategy
+		)
 	}
 }

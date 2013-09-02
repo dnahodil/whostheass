@@ -29,6 +29,17 @@ class SimpleStrategy implements PlayStrategy {
 
 		possiblePlays << pass // Can always play Pass
 
+
+
+		println '======================================================='
+		println "moveToBeatCards $moveToBeatCards"
+		println "cardsInHand $cardsInHand"
+		println "Possible plays:"
+		possiblePlays.each{
+			println it
+		}
+		println '======================================================='
+
 		return possiblePlays.first() as List<Card>
 	}
 
@@ -84,5 +95,11 @@ class SimpleStrategy implements PlayStrategy {
 		}
 
 		return possibilities
+	}
+
+	@Override
+	public String toString() {
+
+		"SimpleStrategy"
 	}
 }

@@ -57,7 +57,8 @@ class Round {
 
 		Move.from(
 			currentPlayer,
-			cardsPlayed
+			cardsPlayed,
+			this
 		)
 	}
 

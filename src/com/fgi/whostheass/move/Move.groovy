@@ -18,21 +18,22 @@ abstract class Move {
 		true
 	}
 
-	static def from(player, cards) {
+	static def from(player, cards, round = null) {
 
-		if (!validPlay(cards)) throw new InvalidMoveException("It is not a valid move to play these cards: $cards")
+		_validatePlay(cards)
 
-		def move = _moveFor(player, cards)
+		def move = _moveFor(player, cards, round)
 
 		player.useCards cards
 
 		return move
 	}
 
-	static def validPlay(cards) {
+	static def _validatePlay(cards) {
 
-		_assIsAlone(cards) &&
-			_areAllSameValue(cards)
+		def validPlay = _assIsAlone(cards) && _areAllSameValue(cards)
+
+		if (!validPlay) throw new InvalidMoveException("It is not a valid move to play these cards: $cards")
 	}
 
 	static def _containsAss(cards) {
@@ -60,7 +61,8 @@ abstract class Move {
 			if (!firstValue) {
 
 				firstValue = it
-			} else {
+			}
+			else {
 
 				if (it != firstValue && it != Joker) {
 
@@ -72,7 +74,9 @@ abstract class Move {
 		return allSame
 	}
 
-	static def _moveFor(player, cards) {
+	static def _moveFor(player, cards, round) {
+
+		println "_moveFor() Called with args $player, $cards and $round"
 
 		def args = [
 			player: player,
@@ -92,7 +96,6 @@ abstract class Move {
 				return new PlayMultiple(args)
 		}
 	}
-
 
 	@Override
 	public String toString() {

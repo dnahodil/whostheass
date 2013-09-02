@@ -6,16 +6,9 @@ import static com.fgi.whostheass.cards.CardImpl.*
 
 class Player {
 
-	static def playerCount = 0
-
 	def id
 	def strategy
 	def cards = []
-
-	Player() {
-
-		id = playerCount++
-	}
 
 	def playNormalRound(playersWhoHavePlayed, movesPlayed, playersStillToPlay) {
 
@@ -49,7 +42,7 @@ class Player {
 		cardsUsed.each {
 			cardPlayed ->
 
-			if (!cards.contains(cardPlayed)) throw new InvalidMoveException("$this cannot use card $cardPlayed as it is not present in $cards")
+			if (!cards.contains(cardPlayed)) throw new InvalidMoveException("$this cannot play $cardsUsed because $cardPlayed is not present in $cards")
 
 			cards.remove cardPlayed
 		}

@@ -8,12 +8,64 @@ class WhosTheAss {
 
 	public static void main(String[] args) {
 
-		new Game(
+		def numGames = 100
+
+		def strategies = [
+			new SimpleStrategy(),
+			new SimpleStrategy(),
+			new SimpleStrategy(),
+			new TerribleStrategy()
+		]
+
+		def stats = initStats(strategies)
+
+		numGames.times{
+
+			def game = new Game(strategies)
+			def results = game.play()
+
+			updateStats(stats, results)
+		}
+
+		processStats(stats, numGames)
+
+		stats.each{
+			println it
+		}
+	}
+
+	static def initStats(strategies) {
+
+		strategies.collect{
 			[
-				new SimpleStrategy(),
-				new SimpleStrategy(),
-				new SimpleStrategy()
+				strategy: it,
+				totalScore: 0,
+				bestScore: Integer.MAX_VALUE,
+				worstScore: Integer.MIN_VALUE
 			]
-		).play()
+		}
+	}
+
+	static def updateStats(stats, results) {
+
+		results.eachWithIndex{
+			player, i ->
+
+			Integer thisScore = player.points
+			def playerStats = stats[i]
+
+			playerStats.totalScore += thisScore
+
+			playerStats.bestScore = Math.min(playerStats.bestScore as Integer, thisScore)
+			playerStats.worstScore = Math.max(playerStats.worstScore as Integer, thisScore)
+		}
+	}
+
+	static def processStats(stats, numGames) {
+
+		stats.each{
+
+			it.averageScore = it.totalScore / numGames
+		}
 	}
 }
