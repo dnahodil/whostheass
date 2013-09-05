@@ -13,9 +13,9 @@ class Round {
 
 	def id
 	def allPlayers
-	def playersWhoHavePlayedViews = []
+	def playersWhoHavePlayedViews
 	def currentPlayerView
-	def playersStillToPlayViews = []
+	def playersStillToPlayViews
 	def moves = []
 
 	Round(firstMove, players) {
@@ -31,8 +31,8 @@ class Round {
 
 	def loadPlayerViews() {
 
-		playersWhoHavePlayedViews << new OpponentViewImpl(playLeader)
-		playersStillToPlayViews << remainingPlayers.collect{ new OpponentViewImpl(it) }
+		playersWhoHavePlayedViews = [new OpponentViewImpl(playLeader)]
+		playersStillToPlayViews = remainingPlayers.collect{ new OpponentViewImpl(it) }
 	}
 
 	def play() {
