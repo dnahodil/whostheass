@@ -20,25 +20,16 @@ class SimpleStrategy implements PlayStrategy {
 
 		cardsHigherThanThosePlayed.each{
 			card ->
-			allCardsWithValueUsingJokers(cardsInHand, card).each{
 
-				if (it.size() == moveToBeatNumberCards)
-					possiblePlays << it
+			allCardsWithValueUsingJokers(cardsInHand, card).each{
+				cardsWithValue ->
+
+				if (cardsWithValue.size() == moveToBeatNumberCards)
+					possiblePlays << cardsWithValue
 			}
 		}
 
 		possiblePlays << pass // Can always play Pass
-
-
-
-		println '======================================================='
-		println "moveToBeatCards $moveToBeatCards"
-		println "cardsInHand $cardsInHand"
-		println "Possible plays:"
-		possiblePlays.each{
-			println it
-		}
-		println '======================================================='
 
 		return possiblePlays.first() as List<Card>
 	}
@@ -79,9 +70,14 @@ class SimpleStrategy implements PlayStrategy {
 
 	static def allCardsWithValueUsingJokers(cardsInHand, card) {
 
-		def numberOfJokers = allCardsWithValue(cardsInHand, Joker).size()
+		def jokersInHand = allCardsWithValue(cardsInHand, Joker)
 
-		if (card == Joker) numberOfJokers -= 1
+		if (card == Joker) {
+
+			return [jokersInHand]
+		}
+
+		def numberOfJokers = jokersInHand.size()
 
 		def workingList = allCardsWithValue(cardsInHand, card)
 

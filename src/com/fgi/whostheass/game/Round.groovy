@@ -32,7 +32,7 @@ class Round {
 	def loadPlayerViews() {
 
 		playersWhoHavePlayedViews << new OpponentViewImpl(playLeader)
-		remainingPlayers.each{ playersStillToPlayViews << new OpponentViewImpl(it) }
+		playersStillToPlayViews << remainingPlayers.collect{ new OpponentViewImpl(it) }
 	}
 
 	def play() {
