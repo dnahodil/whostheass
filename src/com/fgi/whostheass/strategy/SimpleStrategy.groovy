@@ -15,7 +15,7 @@ class SimpleStrategy implements PlayStrategy {
 
 		def possiblePlays = []
 
-		def distinctValidCards =  nonAssCardsInHand(cardsInHand).unique()
+		def distinctValidCards = nonAssCardsInHand(cardsInHand).unique()
 		def cardsHigherThanThosePlayed = distinctValidCards.dropWhile{ it.points <= moveToBeatCardPoints }
 
 		cardsHigherThanThosePlayed.each{
@@ -29,7 +29,7 @@ class SimpleStrategy implements PlayStrategy {
 			}
 		}
 
-		possiblePlays << pass // Can always play Pass
+		possiblePlays << [] // Can always play Pass
 
 		return possiblePlays.first() as List<Card>
 	}
@@ -46,11 +46,6 @@ class SimpleStrategy implements PlayStrategy {
 		if (canLeadAss && hasAssInHand(cardsInHand)) return [Ass]
 
 		return allCardsWithValue(cardsInHand, cardsInHand.first()) as List<Card>
-	}
-
-	static def getPass() {
-
-		[]
 	}
 
 	static def hasAssInHand(cardsInHand) {
