@@ -122,17 +122,11 @@ class Round {
 
 		if (!firstMove.canLead()) throw new InvalidLeadException(firstMove)
 
-		switch (firstMove.class) {
-
-			case LeadAss:
-				if (!canLeadAss) throw new InvalidLeadException(firstMove)
-				return new AssRound(firstMove, players)
-
-			case Pass: PlayJokerOnAss:
-				throw new InvalidLeadException(firstMove)
-
-			default:
-				return new Round(firstMove, players)
+		if (firstMove instanceof LeadAss) {
+			if (!canLeadAss) throw new InvalidLeadException(firstMove)
+			return new AssRound(firstMove, players)
 		}
+		
+		return new Round(firstMove, players)
 	}
 }
