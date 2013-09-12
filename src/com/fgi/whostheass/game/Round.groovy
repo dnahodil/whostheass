@@ -119,10 +119,13 @@ class Round {
 			leader.startRound(playersRemaining, canLeadAss)
 		)
 
-		if (!firstMove.canLead()) throw new InvalidLeadException(firstMove)
+		if (!firstMove.canLead())
+			throw new InvalidLeadException(firstMove)
 
 		if (firstMove instanceof LeadAss) {
-			if (!canLeadAss) throw new InvalidLeadException(firstMove)
+			if (!canLeadAss)
+				throw new InvalidLeadException(firstMove)
+			
 			return new AssRound(firstMove, players)
 		}
 
