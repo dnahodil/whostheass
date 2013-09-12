@@ -1,6 +1,7 @@
 package com.fgi.whostheass.move
 
 import com.fgi.whostheass.game.Round
+import com.fgi.whostheass.move.exceptions.InvalidMoveException
 
 import static com.fgi.whostheass.cards.Card.*
 

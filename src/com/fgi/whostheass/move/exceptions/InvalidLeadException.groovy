@@ -1,4 +1,4 @@
-package com.fgi.whostheass.move
+package com.fgi.whostheass.move.exceptions
 
 class InvalidLeadException extends InvalidMoveException {
 

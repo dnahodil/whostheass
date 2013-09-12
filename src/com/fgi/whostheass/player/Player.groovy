@@ -1,6 +1,6 @@
 package com.fgi.whostheass.player
 
-import com.fgi.whostheass.move.InvalidMoveException
+import com.fgi.whostheass.move.exceptions.InvalidMoveException
 
 import static com.fgi.whostheass.cards.Card.*
 

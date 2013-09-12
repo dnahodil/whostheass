@@ -1,7 +1,7 @@
 package com.fgi.whostheass.game
 
-import com.fgi.whostheass.move.InvalidLeadException
-import com.fgi.whostheass.move.InvalidMoveException
+import com.fgi.whostheass.move.exceptions.InvalidLeadException
+import com.fgi.whostheass.move.exceptions.InvalidMoveException
 import com.fgi.whostheass.move.LeadAss
 import com.fgi.whostheass.move.Move
 import com.fgi.whostheass.move.Pass

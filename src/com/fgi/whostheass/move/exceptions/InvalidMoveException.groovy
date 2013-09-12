@@ -1,4 +1,4 @@
-package com.fgi.whostheass.move
+package com.fgi.whostheass.move.exceptions
 
 class InvalidMoveException extends RuntimeException {
 
@@ -7,8 +7,8 @@ class InvalidMoveException extends RuntimeException {
 		super(message as String)
 	}
 
-	InvalidMoveException(move, previousMove) {
+	InvalidMoveException(move, round) {
 
-		super("Invalid move: $move on $previousMove")
+		super("Invalid move: $move on $round")
 	}
 }
