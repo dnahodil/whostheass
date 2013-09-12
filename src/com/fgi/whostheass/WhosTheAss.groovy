@@ -8,7 +8,7 @@ class WhosTheAss {
 
 	public static void main(String[] args) {
 
-		def numGames = 100
+		def numGames = args[0].toInteger()
 
 		def strategies = [
 			new SimpleStrategy(),
