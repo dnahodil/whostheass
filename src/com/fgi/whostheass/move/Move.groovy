@@ -31,7 +31,7 @@ abstract class Move {
 
 	static def _validatePlay(cards) {
 
-		def validPlay = _assIsAlone(cards) && _areAllSameValue(cards)
+		def validPlay = _areAllSameValue(cards)
 
 		if (!validPlay) throw new InvalidMoveException("It is not a valid move to play these cards: $cards")
 	}
@@ -39,16 +39,6 @@ abstract class Move {
 	static def _containsAss(cards) {
 
 		cards.find { it == Ass }
-	}
-
-	static def _assIsAlone(cards) {
-
-		if (_containsAss(cards)) {
-
-			return cards.size() == 1
-		}
-
-		return true
 	}
 
 	static def _areAllSameValue(cards) {
