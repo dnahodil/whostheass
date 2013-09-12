@@ -2,7 +2,7 @@ package com.fgi.whostheass.strategy
 
 import com.fgi.whostheass.cards.Card
 import com.fgi.whostheass.player.OpponentView
-import static com.fgi.whostheass.cards.CardImpl.*
+import static com.fgi.whostheass.cards.Card.*
 
 class SimpleStrategy implements PlayStrategy {
 

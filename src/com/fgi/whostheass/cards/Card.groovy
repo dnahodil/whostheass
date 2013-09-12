@@ -3,7 +3,7 @@ package com.fgi.whostheass.cards
 import static com.fgi.whostheass.game.Rules.getNumberOfEachNumberInDeck
 import static com.fgi.whostheass.game.Rules.getNumberOfJokersInDeck
 
-public enum CardImpl implements Card {
+public enum Card {
 
 	One(1),
 	Two(2),
@@ -25,7 +25,7 @@ public enum CardImpl implements Card {
 
 	int points
 
-	CardImpl(p) {
+	Card(p) {
 
 		points = p
 	}

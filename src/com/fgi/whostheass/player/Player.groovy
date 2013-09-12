@@ -2,7 +2,7 @@ package com.fgi.whostheass.player
 
 import com.fgi.whostheass.move.InvalidMoveException
 
-import static com.fgi.whostheass.cards.CardImpl.*
+import static com.fgi.whostheass.cards.Card.*
 
 class Player {
 
