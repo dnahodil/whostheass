@@ -1,7 +1,7 @@
 package com.fgi.whostheass.cards
 
 import static com.fgi.whostheass.game.Rules.getNumberOfCardsInHand
-import static com.fgi.whostheass.cards.CardImpl.*
+import static com.fgi.whostheass.cards.Card.*
 
 class Deck {
 
