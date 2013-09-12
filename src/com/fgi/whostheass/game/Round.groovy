@@ -4,7 +4,6 @@ import com.fgi.whostheass.move.exceptions.InvalidLeadException
 import com.fgi.whostheass.move.exceptions.InvalidMoveException
 import com.fgi.whostheass.move.LeadAss
 import com.fgi.whostheass.move.Move
-import com.fgi.whostheass.move.Pass
 import com.fgi.whostheass.player.OpponentViewImpl
 
 class Round {
@@ -126,7 +125,7 @@ class Round {
 			if (!canLeadAss) throw new InvalidLeadException(firstMove)
 			return new AssRound(firstMove, players)
 		}
-		
+
 		return new Round(firstMove, players)
 	}
 }
