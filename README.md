@@ -21,11 +21,11 @@ The methods to implement:
 The method called to choose which card(s) to play on a normal round
 
 <pre>
-public List<Card> playNormalRound(
-  List<Card> cardsInHand, // The cards you have in your hand
-  List<OpponentView> playersWhoHavePlayed, // The OpponentViews of the people who have played in this round already
-  List<List<Card>> movesPlayed, // A list of cards played by the people who have played already this round
-  List<OpponentView> playersStillToPlay // The OpponentViews of the people who are still to play this round
+public List&lt;Card&gt; playNormalRound(
+  List&lt;Card&gt; cardsInHand, // The cards you have in your hand
+  List&lt;OpponentView&gt; playersWhoHavePlayed, // The OpponentViews of the people who have played in this round already
+  List&lt;List&lt;Card&gt;&gt; movesPlayed, // A list of cards played by the people who have played already this round
+  List&lt;OpponentView&gt; playersStillToPlay // The OpponentViews of the people who are still to play this round
 )
 </pre>
 
@@ -36,11 +36,11 @@ The return value must be a `java.util.List` of the `Card`(s) you wish to play. T
 The method called to choose which card(s) to play on an ass round
 
 <pre>
-public List<Card> playAssRound(
-  List<Card> cardsInHand, // The cards you have in your hand
-  List<OpponentView> playersWhoHavePlayed, // The OpponentViews of the people who have played in this round already
-  List<List<Card>> movesPlayed, // A list of cards played by the people who have played already this round
-  List<OpponentView> playersStillToPlay // The OpponentViews of the people who are still to play this round
+public List&lt;Card&gt; playAssRound(
+  List&lt;Card&gt; cardsInHand, // The cards you have in your hand
+  List&lt;OpponentView&gt; playersWhoHavePlayed, // The OpponentViews of the people who have played in this round already
+  List&lt;List&lt;Card&gt;&gt; movesPlayed, // A list of cards played by the people who have played already this round
+  List&lt;OpponentView&gt; playersStillToPlay // The OpponentViews of the people who are still to play this round
 )
 </pre>
 
@@ -51,9 +51,9 @@ The return value must be a `java.util.List` of the `Card` you wish to play. Ther
 This method is called when it is your turn to start a round.
 
 <pre>
-public List<Card> startRound(
-  List<Card> cardsInHand, // The cards you have in your hand
-  List<OpponentView> playersStillToPlay, // The OpponentViews of the players who will play after you
+public List&lt;Card&gt; startRound(
+  List&lt;Card&gt; cardsInHand, // The cards you have in your hand
+  List&lt;OpponentView&gt; playersStillToPlay, // The OpponentViews of the players who will play after you
   boolean canLeadAss // Whether you can lead the Ass card or not
 )
 </pre>
