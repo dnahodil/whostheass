@@ -1,28 +1,40 @@
 package com.fgi.whostheass.move
 
+import static com.fgi.whostheass.cards.Card.Joker
 import com.fgi.whostheass.game.AssRound
-import com.fgi.whostheass.game.Round
 
 class PlayJokerOnAss extends Move {
 
 	def jokerValue
 
 	@Override
-	boolean canPlayOn(Round round) {
+	def value() {
+
+		jokerValue
+	}
+
+	@Override
+	def canPlayOn(round) {
 
 		return round instanceof AssRound
 	}
 
 	@Override
-	boolean canWin() {
+	def canWin() {
 
-		return true
+		true
 	}
 
 	@Override
 	def canLead() {
 
 		false
+	}
+
+	@Override
+	def cardsUsed() {
+
+		[Joker]
 	}
 
 	@Override

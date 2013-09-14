@@ -33,9 +33,10 @@ class AssRound extends Round {
 		def lastMax
 
 		moves.tail().each {
+			move ->
 
-			if (!lastMax || it.card.points >= lastMax.card.points)
-				lastMax = it
+			if (!lastMax || move.value >= lastMax.value)
+				lastMax = move
 		}
 
 		return lastMax.player
@@ -44,5 +45,11 @@ class AssRound extends Round {
 	def getAllCardsPlayed() {
 
 		moves*.cards.flatten()
+	}
+
+	@Override
+	public String toString() {
+
+		"Ass " + super.toString()
 	}
 }

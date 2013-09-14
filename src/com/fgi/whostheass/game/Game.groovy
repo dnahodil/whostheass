@@ -45,6 +45,7 @@ class Game {
 			canLeadAss = !(round instanceof AssRound)
 
 			def canLeadAssString = canLeadAss ? "" : " (Can't lead Ass next round)"
+
 			println "$round. Won by $winner.$canLeadAssString"
 		}
 

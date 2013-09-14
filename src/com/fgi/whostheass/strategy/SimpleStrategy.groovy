@@ -37,7 +37,14 @@ class SimpleStrategy implements PlayStrategy {
 	@Override
 	List<Card> playAssRound(List<Card> cardsInHand, List<OpponentView> playersWhoHavePlayed, List<List<Card>> movesPlayed, List<OpponentView> playersStillToPlay) {
 
-		return [cardsInHand.first()] // Play lowest card
+		def cardToPlay = cardsInHand.first() // Play lowest card
+
+		if (cardToPlay == Joker) {
+
+			return [Joker, One]
+		}
+
+		return [cardToPlay]
 	}
 
 	@Override

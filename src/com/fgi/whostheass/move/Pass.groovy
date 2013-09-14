@@ -1,20 +1,25 @@
 package com.fgi.whostheass.move
 
 import com.fgi.whostheass.game.AssRound
-import com.fgi.whostheass.game.Round
 
 class Pass extends Move {
 
 	@Override
-	boolean canPlayOn(Round round) {
+	def value() {
+
+		null
+	}
+
+	@Override
+	def canPlayOn(round) {
 
 		!(round instanceof AssRound)
 	}
 
 	@Override
-	boolean canWin() {
+	def canWin() {
 
-		return false
+		false
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.fgi.whostheass
 
 import com.fgi.whostheass.game.Game
+import com.fgi.whostheass.strategy.OddStrategy
 import com.fgi.whostheass.strategy.SimpleStrategy
 import com.fgi.whostheass.strategy.TerribleStrategy
 
@@ -14,7 +15,7 @@ class WhosTheAss {
 			new SimpleStrategy(),
 			new SimpleStrategy(),
 			new SimpleStrategy(),
-			new TerribleStrategy()
+			new OddStrategy()
 		]
 
 		def stats = initStats(strategies)

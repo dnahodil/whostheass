@@ -1,6 +1,7 @@
 package com.fgi.whostheass.move
 
-import com.fgi.whostheass.game.Round
+import com.fgi.whostheass.game.AssRound
+import com.fgi.whostheass.move.exceptions.InvalidLeadException
 import com.fgi.whostheass.move.exceptions.InvalidMoveException
 
 import static com.fgi.whostheass.cards.Card.*
@@ -10,13 +11,28 @@ abstract class Move {
 	def cards
 	def player
 
-	abstract boolean canPlayOn(Round round)
+	abstract def canPlayOn(round)
 
-	abstract boolean canWin()
+	abstract def canWin()
+
+	def firstCard() {
+
+		cards.first()
+	}
+
+	def getValue() {
+
+		firstCard()
+	}
 
 	def canLead() {
 
 		true
+	}
+
+	def cardsUsed() {
+
+		cards
 	}
 
 	static def from(player, cards, round = null) {
@@ -25,7 +41,18 @@ abstract class Move {
 
 		def move = _moveFor(player, cards, round)
 
-		player.useCards cards
+		if (round) {
+
+			if (!move.canPlayOn(round))
+				throw new InvalidMoveException(move, round)
+		}
+		else {
+
+			if (!move.canLead())
+				throw new InvalidLeadException(move)
+		}
+
+		player.useCards move.cardsUsed()
 
 		return move
 	}
@@ -40,6 +67,11 @@ abstract class Move {
 	static def _containsAss(cards) {
 
 		cards.find { it == Ass }
+	}
+
+	static def _containsJoker(cards) {
+
+		cards.find { it == Joker }
 	}
 
 	static def _areAllSameValue(cards) {
@@ -65,9 +97,31 @@ abstract class Move {
 		return allSame
 	}
 
-	static def _moveFor(player, cards, round) {
+	static def _moveFor(player, cards, round = null) {
 
-		println "_moveFor() Called with args $player, $cards and $round"
+		cards = cards.sort()
+
+		// Weed out invalid plays, and play Joker on Ass
+		if (round && round instanceof AssRound) {
+
+			switch(cards.size()) {
+				case 0:
+					throw new InvalidMoveException("Can't pass on an Ass round")
+
+				case 1:
+					if (_containsJoker(cards))
+						throw new InvalidMoveException("Can't play Joker on its own on an AssRound.")
+					break;
+
+				case 2:
+					if (_containsJoker(cards))
+						return new PlayJokerOnAss(player: player, cards: cards, jokerValue: cards.first())
+					break;
+
+				default:
+					throw new InvalidMoveException("Can't use $cards to make move on Ass round")
+			}
+		}
 
 		def args = [
 			player: player,
@@ -79,9 +133,7 @@ abstract class Move {
 				return new Pass(args)
 
 			case 1:
-				return _containsAss(cards) ?
-					new LeadAss(args) :
-					new PlaySingle(args)
+				return _containsAss(cards) ? new LeadAss(args) : new PlaySingle(args)
 
 			default:
 				return new PlayMultiple(args)
@@ -91,6 +143,6 @@ abstract class Move {
 	@Override
 	public String toString() {
 
-		"$player played $cards"
+		"$player played ${this.class.simpleName}($cards)"
 	}
 }
