@@ -16,7 +16,7 @@ You will need to know about the [`Card`](https://github.com/dnahodil/whostheass/
 
 The methods to implement:
 
-### playNormalRound
+### playNormalRound()
 
 The method called to choose which card(s) to play on a normal round
 
@@ -31,7 +31,7 @@ public List&lt;Card&gt; playNormalRound(
 
 The return value must be a `java.util.List` of the `Card`(s) you wish to play. To play a single card there should be one element in the `List`. To pass you should return an empty `List` (ie. not `null`). To play multiple cards you should include many instances of the `Card` in the list. For example to play 3 x Sixes your `List` should contain the `Card.Six` value 3 times. You can also include any number of `Card.Joker`s in your `List` to use those Jokers to supplement your other cards.
 
-### playAssRound
+### playAssRound()
 
 The method called to choose which card(s) to play on an ass round
 
@@ -46,7 +46,7 @@ public List&lt;Card&gt; playAssRound(
 
 The return value must be a `java.util.List` of the `Card` you wish to play. There should normally only be 1 element in the returned `List`. The exception is that if you want to play a Joker you need to return 2 cards: The `Card.Joker` and the `Card` value that you want that Joker to be used as. To use a Joker as a Joker (ie. 14 points) you need to return 2 Jokers in the list.
 
-### startRound
+### startRound()
 
 This method is called when it is your turn to start a round.
 
