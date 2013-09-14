@@ -15,6 +15,7 @@ To use this project you need to:
 * Install [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/free_java_ide.html)
 * Check out this project
 * Open IntelliJ and the 'Open Project' and select the project from where you checked it out
+(You may need to point IntelliJ project to where your Groovy SDK is)
 
 ## Implementing your own strategy
 
