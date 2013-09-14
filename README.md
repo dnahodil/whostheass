@@ -8,7 +8,15 @@ Project written in [IntelliJ IDEA Community Edition](http://www.jetbrains.com/id
 
 Doesn't have unit tests (yet?) because I am lazy. :disappointed:
 
-## Implementing Your Own Strategy
+## Using this project yourself
+
+To use this project you need to:
+* Install [Groovy](http://groovy.codehaus.org/)
+* Install [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/free_java_ide.html)
+* Check out this project
+* Open IntelliJ and the 'Open Project' and select the project from where you checked it out
+
+## Implementing your own strategy
 
 To implement and use your own strategy you need to write a class that implements [`PlayStrategy`](https://github.com/dnahodil/whostheass/blob/master/src/com/fgi/whostheass/strategy/PlayStrategy.java).
 
