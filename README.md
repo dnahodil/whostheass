@@ -1,5 +1,11 @@
 # Who's the Ass?
 
+[About](#about)  
+[Using this project yourself](#using-this-project-yourself)  
+[Implementing your own strategy](#implementing-your-own-strategy)
+
+## About
+
 A JVM implementation of [Who's the Ass](http://en.wikipedia.org/wiki/Who's_the_Ass%3F) with the ability to inject each player's strategy.
 
 Written in [Groovy](http://groovy.codehaus.org/) but implementations of `PlayStrategy` can be written in any JVM language.
