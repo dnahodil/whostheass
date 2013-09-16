@@ -2,10 +2,10 @@ package com.fgi.whostheass.player
 
 class OpponentViewImpl implements OpponentView {
 
-	int numberOfCards
-	boolean includesTheAss
+	final int numberOfCards
+	final boolean includesTheAss
 
-	String playerName
+	final String playerName
 
 	OpponentViewImpl(player) {
 
