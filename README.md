@@ -1,8 +1,9 @@
 # Who's the Ass?
 
-[About](#about)  
-[Using this project yourself](#using-this-project-yourself)  
-[Implementing your own strategy](#implementing-your-own-strategy)
+[About](#about) »  
+[Releases](#releases) »  
+[Using this project yourself](#using-this-project-yourself) »  
+[Implementing your own strategy](#implementing-your-own-strategy) »
 
 ## About
 
@@ -13,6 +14,20 @@ Written in [Groovy](http://groovy.codehaus.org/) but implementations of `PlayStr
 Project written in [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/free_java_ide.html).
 
 Doesn't have unit tests (yet?) because I am lazy. :disappointed:
+
+## Releases
+
+### v1.0
+(In progress)
+* Rules and gameplay implemented
+* Can play specified unmber of games with configurable play strategies
+* Can implement your own play strategies
+* *Project built as JAR (so you can write your own `PlayStrategy` without checking out the whole project) ([#11](https://github.com/dnahodil/whostheass/issues/11))*
+
+### v1.1
+(Planned)
+* *End-of-round summary passed to `PlayStrategy` ([#2](https://github.com/dnahodil/whostheass/issues/2))*
+* *`BaseStrategy` class with common code and useful metrics made available. This will make implementing your own `PlayStrategy` much easier. ([#13](https://github.com/dnahodil/whostheass/issues/13))*
 
 ## Using this project yourself
 
