@@ -42,12 +42,10 @@ abstract class Move {
 		def move = _moveFor(player, cards, round)
 
 		if (round) {
-
 			if (!move.canPlayOn(round))
 				throw new InvalidMoveException(move, round)
 		}
 		else {
-
 			if (!move.canLead())
 				throw new InvalidLeadException(move)
 		}
@@ -80,15 +78,11 @@ abstract class Move {
 		def firstValue
 
 		cards.sort().each {
-
 			if (!firstValue) {
-
 				firstValue = it
 			}
 			else {
-
 				if (it != firstValue && it != Joker) {
-
 					allSame = false
 				}
 			}
