@@ -5,7 +5,7 @@ import com.fgi.whostheass.game.AssRound
 class Pass extends Move {
 
 	@Override
-	def value() {
+	def getValue() {
 
 		null
 	}

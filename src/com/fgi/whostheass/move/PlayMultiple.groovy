@@ -5,7 +5,7 @@ class PlayMultiple extends Move {
 	@Override
 	def canPlayOn(round) {
 
-		(round.moves.first() instanceof PlayMultiple)
+		round.firstMove instanceof PlayMultiple
 	}
 
 	@Override
