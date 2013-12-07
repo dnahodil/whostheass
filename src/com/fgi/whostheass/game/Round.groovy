@@ -12,7 +12,6 @@ class Round {
 
 	def id
 	def allPlayers
-	def opponentViews = [:]
 	def playersWhoHavePlayedViews
 	def currentPlayerView
 	def playersStillToPlayViews
@@ -35,11 +34,22 @@ class Round {
 		playersStillToPlayViews = remainingPlayers.collect{ opponentViewFor(it) }
 	}
 
+	void updatePlayerViews() {
+
+		if (currentPlayerView) playersWhoHavePlayedViews << currentPlayerView
+
+		if (playersStillToPlayViews.size()) {
+			currentPlayerView = playersStillToPlayViews.first()
+			playersStillToPlayViews = playersStillToPlayViews.tail()
+		}
+		else {
+			currentPlayerView = null
+		}
+	}
+
 	def play() {
 
 		remainingPlayers.each {
-
-			updatePlayerViews()
 
 			def move = getPlayerMove(it)
 
@@ -48,7 +58,7 @@ class Round {
 			playMove move
 		}
 
-		println "____________________________________________"
+		println "___ End of round ___________________________"
 		println "playersWhoHavePlayedViews = $playersWhoHavePlayedViews"
 		println "currentPlayerView = $currentPlayerView"
 		println "playersStillToPlayViews = $playersStillToPlayViews"
@@ -73,17 +83,11 @@ class Round {
 		)
 	}
 
-	void updatePlayerViews() {
-
-		if (currentPlayerView) playersWhoHavePlayedViews << currentPlayerView
-
-		currentPlayerView = playersStillToPlayViews.first()
-		playersStillToPlayViews = playersStillToPlayViews.tail()
-	}
-
 	void playMove(move) {
 
 		moves << move
+
+		updatePlayerViews()
 	}
 
 	def getMovesAsCardArrays() {
@@ -122,11 +126,7 @@ class Round {
 
 	def opponentViewFor(player) {
 
-		if (!opponentViews[player]) {
-			opponentViews[player] = new OpponentViewImpl(player)
-		}
-
-		return opponentViews[player]
+		new OpponentViewImpl(player)
 	}
 
 	@Override
