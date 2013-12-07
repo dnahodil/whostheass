@@ -8,7 +8,7 @@ class PlayJokerOnAss extends Move {
 	def jokerValue
 
 	@Override
-	def value() {
+	def getValue() {
 
 		jokerValue
 	}
