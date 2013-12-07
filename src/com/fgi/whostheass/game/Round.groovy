@@ -1,7 +1,6 @@
 package com.fgi.whostheass.game
 
 import com.fgi.whostheass.move.exceptions.InvalidLeadException
-import com.fgi.whostheass.move.exceptions.InvalidMoveException
 import com.fgi.whostheass.move.LeadAss
 import com.fgi.whostheass.move.Move
 import com.fgi.whostheass.player.OpponentViewImpl
@@ -36,7 +35,8 @@ class Round {
 
 	void updatePlayerViews() {
 
-		if (currentPlayerView) playersWhoHavePlayedViews << currentPlayerView
+		if (currentPlayerView)
+			playersWhoHavePlayedViews << currentPlayerView
 
 		if (playersStillToPlayViews.size()) {
 			currentPlayerView = playersStillToPlayViews.first()
@@ -50,12 +50,7 @@ class Round {
 	def play() {
 
 		remainingPlayers.each {
-
-			def move = getPlayerMove(it)
-
-			if (!move.canPlayOn(this)) throw new InvalidMoveException(move, this)
-
-			playMove move
+			playMove getPlayerMove(it)
 		}
 
 		println "___ End of round ___________________________"
@@ -65,7 +60,6 @@ class Round {
 		println "^__________________________________________^"
 
 		allPlayers.each {
-
 			notifyPlayerOfOutcome(it)
 		}
 
@@ -88,6 +82,11 @@ class Round {
 		moves << move
 
 		updatePlayerViews()
+	}
+
+	def getFirstMove() {
+
+		moves.first()
 	}
 
 	def getMovesAsCardArrays() {
@@ -124,7 +123,7 @@ class Round {
 		player.updateAfterNormalRound([], moves, opponentViewFor(winner))
 	}
 
-	def opponentViewFor(player) {
+	static def opponentViewFor(player) {
 
 		new OpponentViewImpl(player)
 	}
