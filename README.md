@@ -11,7 +11,7 @@ A JVM implementation of [Who's the Ass](http://en.wikipedia.org/wiki/Who's_the_A
 
 Written in [Groovy](http://groovy.codehaus.org/) but implementations of `PlayStrategy` can be written in any JVM language.
 
-Project written in [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/free_java_ide.html).
+Developed using [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/free_java_ide.html).
 
 Doesn't have unit tests (yet?) because I am lazy. :disappointed:
 
