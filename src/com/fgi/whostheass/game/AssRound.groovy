@@ -28,6 +28,12 @@ class AssRound extends Round {
 	}
 
 	@Override
+	void notifyPlayerOfOutcome(player) {
+
+		player.updateAfterAssRound([], moves, opponentViewFor(winner))
+	}
+
+	@Override
 	def getWinner() {
 
 		def lastMax

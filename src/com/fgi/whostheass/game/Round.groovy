@@ -12,6 +12,7 @@ class Round {
 
 	def id
 	def allPlayers
+	def opponentViews = [:]
 	def playersWhoHavePlayedViews
 	def currentPlayerView
 	def playersStillToPlayViews
@@ -30,8 +31,8 @@ class Round {
 
 	def loadPlayerViews() {
 
-		playersWhoHavePlayedViews = [new OpponentViewImpl(playLeader)]
-		playersStillToPlayViews = remainingPlayers.collect{ new OpponentViewImpl(it) }
+		playersWhoHavePlayedViews = [opponentViewFor(playLeader)]
+		playersStillToPlayViews = remainingPlayers.collect{ opponentViewFor(it) }
 	}
 
 	def play() {
@@ -45,6 +46,17 @@ class Round {
 			if (!move.canPlayOn(this)) throw new InvalidMoveException(move, this)
 
 			playMove move
+		}
+
+		println "____________________________________________"
+		println "playersWhoHavePlayedViews = $playersWhoHavePlayedViews"
+		println "currentPlayerView = $currentPlayerView"
+		println "playersStillToPlayViews = $playersStillToPlayViews"
+		println "^__________________________________________^"
+
+		allPlayers.each {
+
+			notifyPlayerOfOutcome(it)
 		}
 
 		return winner
@@ -101,6 +113,20 @@ class Round {
 	def getWinner() {
 
 		moves.findAll{ it.canWin() }.last().player
+	}
+
+	void notifyPlayerOfOutcome(player) {
+
+		player.updateAfterNormalRound([], moves, opponentViewFor(winner))
+	}
+
+	def opponentViewFor(player) {
+
+		if (!opponentViews[player]) {
+			opponentViews[player] = new OpponentViewImpl(player)
+		}
+
+		return opponentViews[player]
 	}
 
 	@Override

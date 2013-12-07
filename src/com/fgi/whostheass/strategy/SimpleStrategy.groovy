@@ -55,6 +55,30 @@ class SimpleStrategy implements PlayStrategy {
 		return allCardsWithValue(cardsInHand, cardsInHand.first()) as List<Card>
 	}
 
+	@Override
+	void updateAfterNormalRound(List<OpponentView> allPlayers, List<List<Card>> movesPlayed, OpponentView winner) {
+
+		// Do nothing
+		println """\
+updateAfterNormalRound(
+	List<OpponentView> allPlayers = $allPlayers,
+	List<List<Card>> movePlayed = $movesPlayed,
+	OpponentView winner = $winner
+)"""
+	}
+
+	@Override
+	void updateAfterAssRound(List<OpponentView> allPlayers, List<List<Card>> movesPlayed, OpponentView tookCards) {
+
+		// Do nothing
+		println """\
+updateAfterAssRound(
+	List<OpponentView> allPlayers = $allPlayers,
+	List<List<Card>> movesPlayed = $movesPlayed,
+	OpponentView tookCards = $tookCards
+)"""
+	}
+
 	static def hasAssInHand(cardsInHand) {
 
 		cardsInHand.find{ it == Ass }

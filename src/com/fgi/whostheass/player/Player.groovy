@@ -48,6 +48,16 @@ class Player {
 		}
 	}
 
+	void updateAfterNormalRound(allPlayers, movesPlayed, winner) {
+
+		strategy.updateAfterNormalRound(allPlayers, movesPlayed, winner)
+	}
+
+	void updateAfterAssRound(allPlayers, movesPlayed, tookCards) {
+
+		strategy.updateAfterAssRound(allPlayers, movesPlayed, tookCards)
+	}
+
 	def hasTheAss() {
 
 		cards.find{ it == Ass } as boolean
