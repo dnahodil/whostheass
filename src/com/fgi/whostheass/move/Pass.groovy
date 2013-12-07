@@ -27,4 +27,10 @@ class Pass extends Move {
 
 		false
 	}
+
+	@Override
+	public String toString() {
+
+		"$player passed"
+	}
 }

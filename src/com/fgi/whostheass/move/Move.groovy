@@ -106,11 +106,11 @@ abstract class Move {
 
 			switch(cards.size()) {
 				case 0:
-					throw new InvalidMoveException("Can't pass on an Ass round")
+					throw new InvalidMoveException("Can't pass on an Ass round. ($player)")
 
 				case 1:
 					if (_containsJoker(cards))
-						throw new InvalidMoveException("Can't play Joker on its own on an AssRound.")
+						throw new InvalidMoveException("Can't play Joker on its own on an AssRound. ($player)")
 					break;
 
 				case 2:
@@ -119,7 +119,7 @@ abstract class Move {
 					break;
 
 				default:
-					throw new InvalidMoveException("Can't use $cards to make move on Ass round")
+					throw new InvalidMoveException("Can't use $cards to make move on Ass round. ($player)")
 			}
 		}
 
@@ -143,6 +143,6 @@ abstract class Move {
 	@Override
 	public String toString() {
 
-		"$player played ${this.class.simpleName}($cards)"
+		"$player played ${this.class.simpleName}(${cards.join(", ")})"
 	}
 }
