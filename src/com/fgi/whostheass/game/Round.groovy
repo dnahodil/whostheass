@@ -24,12 +24,12 @@ class Round {
 
 		allPlayers = players
 
-		loadPlayerViews()
+		initPlayerViews()
 
 		playMove firstMove
 	}
 
-	def loadPlayerViews() {
+	def initPlayerViews() {
 
 		playersWhoHavePlayedViews = [opponentViewFor(playLeader)]
 		playersStillToPlayViews = remainingPlayers.collect{ opponentViewFor(it) }
