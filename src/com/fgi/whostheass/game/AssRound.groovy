@@ -38,11 +38,9 @@ class AssRound extends Round {
 
 		def lastMax
 
-		moves.tail().each {
-			move ->
+		moves.tail().each { move ->
 
-			if (!lastMax || move.value >= lastMax.value)
-				lastMax = move
+			if (!lastMax || move.value >= lastMax.value) lastMax = move
 		}
 
 		return lastMax.player
