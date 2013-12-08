@@ -28,8 +28,10 @@ Doesn't have unit tests (yet?) because I am lazy. :disappointed:
 
 #### v2.0
 * [&#10003;] End-of-round summary passed to `PlayStrategy` ([#2](https://github.com/dnahodil/whostheass/issues/2))
-* [ ] `BaseStrategy` class with common code and useful metrics made available. This will make implementing your own `PlayStrategy` much easier. ([#13](https://github.com/dnahodil/whostheass/issues/13))
 * [ ] Project built as JAR (so you can write your own `PlayStrategy` without checking out the whole project) ([#11](https://github.com/dnahodil/whostheass/issues/11))
+
+#### v2.1
+* [ ] `BaseStrategy` class with common code and useful metrics made available. This will make implementing your own `PlayStrategy` much easier. ([#13](https://github.com/dnahodil/whostheass/issues/13))
 
 ## Using this project yourself
 
