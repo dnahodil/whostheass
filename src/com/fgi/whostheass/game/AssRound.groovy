@@ -54,10 +54,4 @@ class AssRound extends Round {
 
 		moves*.cards.flatten()
 	}
-
-	@Override
-	public String toString() {
-
-		super.toString() + " (Ass Round)"
-	}
 }
