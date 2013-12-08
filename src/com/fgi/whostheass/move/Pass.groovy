@@ -5,7 +5,7 @@ import com.fgi.whostheass.game.AssRound
 class Pass extends Move {
 
 	@Override
-	def value() {
+	def getValue() {
 
 		null
 	}
@@ -26,5 +26,11 @@ class Pass extends Move {
 	def canLead() {
 
 		false
+	}
+
+	@Override
+	public String toString() {
+
+		"$player passed"
 	}
 }

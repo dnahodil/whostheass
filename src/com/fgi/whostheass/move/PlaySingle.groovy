@@ -5,9 +5,7 @@ class PlaySingle extends Move {
 	@Override
 	def canPlayOn(round) {
 
-		def firstMove = round.moves.first()
-
-		firstMove instanceof PlaySingle ||firstMove instanceof LeadAss
+		round.firstMove instanceof PlaySingle || round.firstMove instanceof LeadAss
 	}
 
 	@Override

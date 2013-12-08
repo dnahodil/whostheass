@@ -32,6 +32,18 @@ class OddStrategy implements PlayStrategy {
 		return allCardsWithValue(cardsInHand, cardsInHand.first()) as List<Card>
 	}
 
+	@Override
+	void updateAfterNormalRound(List<OpponentView> allPlayers, List<List<Card>> movesPlayed, OpponentView winner) {
+
+		// Do nothing
+	}
+
+	@Override
+	void updateAfterAssRound(List<OpponentView> allPlayers, List<List<Card>> movesPlayed, OpponentView tookCards) {
+
+		// Do nothing
+	}
+
 	static def hasAssInHand(cardsInHand) {
 
 		cardsInHand.find{ it == Ass }

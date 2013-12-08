@@ -33,7 +33,13 @@ public enum Card {
 	@Override
 	public String toString() {
 
-		this == Ass ? "{The Ass}" : name()
+		switch(this) {
+			case [Joker, Ass]:
+				return name()
+
+			default:
+				return points
+		}
 	}
 
 	static def getJokers() {
@@ -51,13 +57,11 @@ public enum Card {
 
 		def numbers = []
 
-		(One..Thirteen).each {
-			cardValue ->
+		(One..Thirteen).each { cardValue ->
 
-				numberOfEachNumberInDeck.times {
-
-					numbers << cardValue
-				}
+			numberOfEachNumberInDeck.times {
+				numbers << cardValue
+			}
 		}
 
 		return numbers

@@ -1,7 +1,6 @@
 package com.fgi.whostheass.game
 
 import com.fgi.whostheass.move.exceptions.InvalidLeadException
-import com.fgi.whostheass.move.exceptions.InvalidMoveException
 import com.fgi.whostheass.move.LeadAss
 import com.fgi.whostheass.move.Move
 import com.fgi.whostheass.player.OpponentViewImpl
@@ -23,28 +22,42 @@ class Round {
 
 		allPlayers = players
 
-		loadPlayerViews()
+		initPlayerViews()
 
 		playMove firstMove
 	}
 
-	def loadPlayerViews() {
+	def initPlayerViews() {
 
-		playersWhoHavePlayedViews = [new OpponentViewImpl(playLeader)]
-		playersStillToPlayViews = remainingPlayers.collect{ new OpponentViewImpl(it) }
+		playersWhoHavePlayedViews = []
+		currentPlayerView = opponentViewFor(playLeader)
+		playersStillToPlayViews = opponentViewsFor(remainingPlayers)
+	}
+
+	void updatePlayerViews() {
+
+		// New OpponentView to represent new hand state
+		def previousPlayer = allPlayers[playersWhoHavePlayedViews.size()]
+		playersWhoHavePlayedViews << opponentViewFor(previousPlayer)
+
+		// Move any remaining players forward
+		if (playersStillToPlayViews.size()) {
+			currentPlayerView = playersStillToPlayViews.first()
+			playersStillToPlayViews = playersStillToPlayViews.tail()
+		}
+		else {
+			currentPlayerView = null
+		}
 	}
 
 	def play() {
 
 		remainingPlayers.each {
+			playMove getPlayerMove(it)
+		}
 
-			updatePlayerViews()
-
-			def move = getPlayerMove(it)
-
-			if (!move.canPlayOn(this)) throw new InvalidMoveException(move, this)
-
-			playMove move
+		allPlayers.each {
+			notifyPlayerOfOutcome(it)
 		}
 
 		return winner
@@ -61,17 +74,16 @@ class Round {
 		)
 	}
 
-	void updatePlayerViews() {
-
-		if (currentPlayerView) playersWhoHavePlayedViews << currentPlayerView
-
-		currentPlayerView = playersStillToPlayViews.first()
-		playersStillToPlayViews = playersStillToPlayViews.tail()
-	}
-
 	void playMove(move) {
 
 		moves << move
+
+		updatePlayerViews()
+	}
+
+	def getFirstMove() {
+
+		moves.first()
 	}
 
 	def getMovesAsCardArrays() {
@@ -101,6 +113,25 @@ class Round {
 	def getWinner() {
 
 		moves.findAll{ it.canWin() }.last().player
+	}
+
+	void notifyPlayerOfOutcome(player) {
+
+		player.updateAfterNormalRound(
+			opponentViewsFor(allPlayers),
+			moves*.cards,
+			opponentViewFor(winner)
+		)
+	}
+
+	def opponentViewFor(player) {
+
+		new OpponentViewImpl(player)
+	}
+
+	def opponentViewsFor(players) {
+
+		players.collect{ opponentViewFor(it) }
 	}
 
 	@Override

@@ -19,8 +19,8 @@ class OpponentViewImpl implements OpponentView {
 	public String toString() {
 
 		def cardsInfo = "$numberOfCards in hand"
-		def assInfo = includesTheAss ? "including The Ass" : ""
+		def assInfo = includesTheAss ? " including The Ass" : ""
 
-		"(View of $playerName - $cardsInfo $assInfo)"
+		"(View of $playerName - $cardsInfo$assInfo)"
 	}
 }

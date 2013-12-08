@@ -42,12 +42,10 @@ abstract class Move {
 		def move = _moveFor(player, cards, round)
 
 		if (round) {
-
 			if (!move.canPlayOn(round))
 				throw new InvalidMoveException(move, round)
 		}
 		else {
-
 			if (!move.canLead())
 				throw new InvalidLeadException(move)
 		}
@@ -80,15 +78,11 @@ abstract class Move {
 		def firstValue
 
 		cards.sort().each {
-
 			if (!firstValue) {
-
 				firstValue = it
 			}
 			else {
-
 				if (it != firstValue && it != Joker) {
-
 					allSame = false
 				}
 			}
@@ -106,11 +100,11 @@ abstract class Move {
 
 			switch(cards.size()) {
 				case 0:
-					throw new InvalidMoveException("Can't pass on an Ass round")
+					throw new InvalidMoveException("Can't pass on an Ass round. ($player)")
 
 				case 1:
 					if (_containsJoker(cards))
-						throw new InvalidMoveException("Can't play Joker on its own on an AssRound.")
+						throw new InvalidMoveException("Can't play Joker on its own on an AssRound. ($player)")
 					break;
 
 				case 2:
@@ -119,7 +113,7 @@ abstract class Move {
 					break;
 
 				default:
-					throw new InvalidMoveException("Can't use $cards to make move on Ass round")
+					throw new InvalidMoveException("Can't use $cards to make move on Ass round. ($player)")
 			}
 		}
 
@@ -143,6 +137,6 @@ abstract class Move {
 	@Override
 	public String toString() {
 
-		"$player played ${this.class.simpleName}($cards)"
+		"$player played ${this.class.simpleName}(${cards.join(", ")})"
 	}
 }
