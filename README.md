@@ -27,7 +27,7 @@ Doesn't have unit tests (yet?) because I am lazy. :disappointed:
 ### In progress
 
 #### v2.0
-* [ ] End-of-round summary passed to `PlayStrategy` ([#2](https://github.com/dnahodil/whostheass/issues/2))
+* [&#10003;] End-of-round summary passed to `PlayStrategy` ([#2](https://github.com/dnahodil/whostheass/issues/2))
 * [ ] `BaseStrategy` class with common code and useful metrics made available. This will make implementing your own `PlayStrategy` much easier. ([#13](https://github.com/dnahodil/whostheass/issues/13))
 * [ ] Project built as JAR (so you can write your own `PlayStrategy` without checking out the whole project) ([#11](https://github.com/dnahodil/whostheass/issues/11))
 
@@ -50,7 +50,7 @@ The methods to implement:
 
 ### playNormalRound()
 
-The method called to choose which card(s) to play on a normal round
+The method called to choose which card(s) to play on a normal round.
 
 <pre>
 public List&lt;Card&gt; playNormalRound(
@@ -65,7 +65,7 @@ The return value must be a `java.util.List` of the `Card`(s) you wish to play. T
 
 ### playAssRound()
 
-The method called to choose which card(s) to play on an ass round
+The method called to choose which card(s) to play on an ass round.
 
 <pre>
 public List&lt;Card&gt; playAssRound(
@@ -92,4 +92,26 @@ public List&lt;Card&gt; startRound(
 
 The return value must be a `java.util.List` of the `Card`(s) you wish to play. The `List` cannot be empty.
 
+### updateAfterNormalRound()
+
+This method is used to pass you the results of a round that has just finished.
+
+<pre>
+public void updateAfterNormalRound(
+  List&lt;OpponentView&gt; allPlayers, // The OpponentViews of all players in the Game
+  List&lt;List&lt;Card&gt;&gt; movesPlayed, // The Cards they each played
+  OpponentView winner // The OpponentView of the player who won the round
+);
+</pre>
+
+### updateAfterAssRound()
+
+This method is used to pass you the results of an ass round that has just finished.
+
+<pre>
+public void updateAfterAssRound(
+  List&lt;OpponentView&gt; allPlayers, // The OpponentViews of all players in the Game
+  List&lt;List&lt;Card&gt;&gt; movesPlayed, // The Cards they each played
+  OpponentView tookCards // The OpponentView of the player who took the Cards from <em>before</em> they took the Cards
+);
 </pre>
