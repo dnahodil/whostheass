@@ -18,11 +18,9 @@ class SimpleStrategy implements PlayStrategy {
 		def distinctValidCards = nonAssCardsInHand(cardsInHand).unique()
 		def cardsHigherThanThosePlayed = distinctValidCards.dropWhile{ it.points <= moveToBeatCardPoints }
 
-		cardsHigherThanThosePlayed.each{
-			card ->
+		cardsHigherThanThosePlayed.each{ card ->
 
-			allCardsWithValueUsingJokers(cardsInHand, card).each{
-				cardsWithValue ->
+			allCardsWithValueUsingJokers(cardsInHand, card).each{ cardsWithValue ->
 
 				if (cardsWithValue.size() == moveToBeatNumberCards)
 					possiblePlays << cardsWithValue
@@ -59,24 +57,12 @@ class SimpleStrategy implements PlayStrategy {
 	void updateAfterNormalRound(List<OpponentView> allPlayers, List<List<Card>> movesPlayed, OpponentView winner) {
 
 		// Do nothing
-		println """\
-updateAfterNormalRound(
-	List<OpponentView> allPlayers = $allPlayers,
-	List<List<Card>> movePlayed = $movesPlayed,
-	OpponentView winner = $winner
-)"""
 	}
 
 	@Override
 	void updateAfterAssRound(List<OpponentView> allPlayers, List<List<Card>> movesPlayed, OpponentView tookCards) {
 
 		// Do nothing
-		println """\
-updateAfterAssRound(
-	List<OpponentView> allPlayers = $allPlayers,
-	List<List<Card>> movesPlayed = $movesPlayed,
-	OpponentView tookCards = $tookCards
-)"""
 	}
 
 	static def hasAssInHand(cardsInHand) {

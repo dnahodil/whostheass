@@ -31,7 +31,7 @@ class Round {
 
 		playersWhoHavePlayedViews = []
 		currentPlayerView = opponentViewFor(playLeader)
-		playersStillToPlayViews = remainingPlayers.collect{ opponentViewFor(it) }
+		playersStillToPlayViews = opponentViewsFor(remainingPlayers)
 	}
 
 	void updatePlayerViews() {
@@ -55,12 +55,6 @@ class Round {
 		remainingPlayers.each {
 			playMove getPlayerMove(it)
 		}
-
-		println "___ End of round ___________________________"
-		println "playersWhoHavePlayedViews = $playersWhoHavePlayedViews"
-		println "currentPlayerView = $currentPlayerView"
-		println "playersStillToPlayViews = $playersStillToPlayViews"
-		println "^__________________________________________^"
 
 		allPlayers.each {
 			notifyPlayerOfOutcome(it)
@@ -123,12 +117,21 @@ class Round {
 
 	void notifyPlayerOfOutcome(player) {
 
-		player.updateAfterNormalRound([], moves*.cards, opponentViewFor(winner))
+		player.updateAfterNormalRound(
+			opponentViewsFor(allPlayers),
+			moves*.cards,
+			opponentViewFor(winner)
+		)
 	}
 
-	static def opponentViewFor(player) {
+	def opponentViewFor(player) {
 
 		new OpponentViewImpl(player)
+	}
+
+	def opponentViewsFor(players) {
+
+		players.collect{ opponentViewFor(it) }
 	}
 
 	@Override

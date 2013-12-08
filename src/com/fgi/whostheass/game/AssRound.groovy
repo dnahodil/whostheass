@@ -30,7 +30,11 @@ class AssRound extends Round {
 	@Override
 	void notifyPlayerOfOutcome(player) {
 
-		player.updateAfterAssRound([], moves*.cards, opponentViewFor(winner))
+		player.updateAfterAssRound(
+			opponentViewsFor(allPlayers),
+			moves*.cards,
+			opponentViewFor(winner)
+		)
 	}
 
 	@Override
