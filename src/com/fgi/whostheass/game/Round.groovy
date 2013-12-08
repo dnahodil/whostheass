@@ -7,8 +7,6 @@ import com.fgi.whostheass.player.OpponentViewImpl
 
 class Round {
 
-	static def roundCount = 0
-
 	def id
 	def allPlayers
 	def playersWhoHavePlayedViews
@@ -16,9 +14,9 @@ class Round {
 	def playersStillToPlayViews
 	def moves = []
 
-	Round(firstMove, players) {
+	Round(id, firstMove, players) {
 
-		id = roundCount++
+		this.id = id
 
 		allPlayers = players
 
@@ -140,7 +138,7 @@ class Round {
 		"Round #$id. " + moves.join(" > ")
 	}
 
-	static def forPlayers(players, canLeadAss) {
+	static def forPlayers(id, players, canLeadAss) {
 
 		def leader = players.first()
 		def playersRemaining = players.tail()
@@ -154,9 +152,9 @@ class Round {
 			if (!canLeadAss)
 				throw new InvalidLeadException(firstMove)
 
-			return new AssRound(firstMove, players)
+			return new AssRound(id, firstMove, players)
 		}
 
-		return new Round(firstMove, players)
+		return new Round(id, firstMove, players)
 	}
 }

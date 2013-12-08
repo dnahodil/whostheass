@@ -2,9 +2,9 @@ package com.fgi.whostheass.game
 
 class AssRound extends Round {
 
-	AssRound(firstMove, players) {
+	AssRound(id, firstMove, players) {
 
-		super(firstMove, players)
+		super(id, firstMove, players)
 	}
 
 	@Override
@@ -58,6 +58,6 @@ class AssRound extends Round {
 	@Override
 	public String toString() {
 
-		"Ass " + super.toString()
+		super.toString() + " (Ass Round)"
 	}
 }

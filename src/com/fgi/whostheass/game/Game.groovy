@@ -34,10 +34,11 @@ class Game {
 	def play() {
 
 		def canLeadAss = true
+		def roundCount = 0
 
 		while (!anyPlayerHasGoneOut) {
 
-			def round = Round.forPlayers(players, canLeadAss)
+			def round = Round.forPlayers(++roundCount, players, canLeadAss)
 
 			def winner = round.play()
 
