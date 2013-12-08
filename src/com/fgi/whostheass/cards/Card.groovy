@@ -36,6 +36,7 @@ public enum Card {
 		switch(this) {
 			case [Joker, Ass]:
 				return name()
+
 			default:
 				return points
 		}

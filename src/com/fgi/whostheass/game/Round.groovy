@@ -29,15 +29,18 @@ class Round {
 
 	def initPlayerViews() {
 
-		playersWhoHavePlayedViews = [opponentViewFor(playLeader)]
+		playersWhoHavePlayedViews = []
+		currentPlayerView = opponentViewFor(playLeader)
 		playersStillToPlayViews = remainingPlayers.collect{ opponentViewFor(it) }
 	}
 
 	void updatePlayerViews() {
 
-		if (currentPlayerView)
-			playersWhoHavePlayedViews << currentPlayerView
+		// New OpponentView to represent new hand state
+		def previousPlayer = allPlayers[playersWhoHavePlayedViews.size()]
+		playersWhoHavePlayedViews << opponentViewFor(previousPlayer)
 
+		// Move any remaining players forward
 		if (playersStillToPlayViews.size()) {
 			currentPlayerView = playersStillToPlayViews.first()
 			playersStillToPlayViews = playersStillToPlayViews.tail()
@@ -120,7 +123,7 @@ class Round {
 
 	void notifyPlayerOfOutcome(player) {
 
-		player.updateAfterNormalRound([], moves, opponentViewFor(winner))
+		player.updateAfterNormalRound([], moves*.cards, opponentViewFor(winner))
 	}
 
 	static def opponentViewFor(player) {
