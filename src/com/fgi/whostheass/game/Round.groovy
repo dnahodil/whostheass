@@ -39,13 +39,8 @@ class Round {
 		playersWhoHavePlayedViews << opponentViewFor(previousPlayer)
 
 		// Move any remaining players forward
-		if (playersStillToPlayViews.size()) {
-			currentPlayerView = playersStillToPlayViews.first()
-			playersStillToPlayViews = playersStillToPlayViews.tail()
-		}
-		else {
-			currentPlayerView = null
-		}
+		currentPlayerView = playersStillToPlayViews.firstIfAny()
+		playersStillToPlayViews = playersStillToPlayViews.tailIfAny()
 	}
 
 	def play() {
