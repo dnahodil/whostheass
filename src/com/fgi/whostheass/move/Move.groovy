@@ -74,17 +74,13 @@ abstract class Move {
 
 	static def _areAllSameValue(cards) {
 
+		def sortedCards = cards.sort()
 		def allSame = true
-		def firstValue
+		def firstValue = sortedCards.firstIfAny()
 
-		cards.sort().each {
-			if (!firstValue) {
-				firstValue = it
-			}
-			else {
-				if (it != firstValue && it != Joker) {
-					allSame = false
-				}
+		sortedCards.each {
+			if (it != firstValue && it != Joker) {
+				allSame = false
 			}
 		}
 
