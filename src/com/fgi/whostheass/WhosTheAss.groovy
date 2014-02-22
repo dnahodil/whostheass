@@ -17,6 +17,11 @@ class WhosTheAss {
 			new OddStrategy()
 		]
 
+		new WhosTheAss(numGames, strategies)
+	}
+
+	WhosTheAss(numGames, strategies) {
+
 		def stats = initStats(strategies)
 
 		numGames.times{
