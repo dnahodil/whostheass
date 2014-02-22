@@ -35,10 +35,7 @@ class WhosTheAss {
 		}
 
 		processStats(numGames)
-
-		stats.each{
-			println it
-		}
+		presentStats()
 	}
 
 	void initStats(strategies) {
@@ -73,6 +70,14 @@ class WhosTheAss {
 		stats.each{
 
 			it.averageScore = it.totalScore / numGames
+		}
+	}
+
+	void presentStats() {
+
+		stats.each{
+
+			println it
 		}
 	}
 }
