@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="groovy-extra-list-behaviour">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/groovy-extra-list-behaviour-1.1-Snapshot.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/groovy-extra-list-behaviour-1.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
