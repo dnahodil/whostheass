@@ -20,28 +20,30 @@ class WhosTheAss {
 		new WhosTheAss(numGames, strategies)
 	}
 
+	def stats
+
 	WhosTheAss(numGames, strategies) {
 
-		def stats = initStats(strategies)
+		initStats(strategies)
 
 		numGames.times{
 
 			def game = new Game(strategies)
 			def results = game.play()
 
-			updateStats(stats, results)
+			updateStats(results)
 		}
 
-		processStats(stats, numGames)
+		processStats(numGames)
 
 		stats.each{
 			println it
 		}
 	}
 
-	static def initStats(strategies) {
+	void initStats(strategies) {
 
-		strategies.collect{
+		stats = strategies.collect{
 			[
 				strategy: it,
 				totalScore: 0,
@@ -51,7 +53,7 @@ class WhosTheAss {
 		}
 	}
 
-	static def updateStats(stats, results) {
+	void updateStats(results) {
 
 		results.eachWithIndex{
 			player, i ->
@@ -66,7 +68,7 @@ class WhosTheAss {
 		}
 	}
 
-	static def processStats(stats, numGames) {
+	void processStats(numGames) {
 
 		stats.each{
 
