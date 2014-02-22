@@ -70,6 +70,7 @@ class WhosTheAss {
 		stats.each{
 
 			it.averageScore = it.totalScore / numGames
+			it.remove 'totalScore'
 		}
 	}
 
