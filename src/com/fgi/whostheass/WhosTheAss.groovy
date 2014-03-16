@@ -68,7 +68,6 @@ class WhosTheAss {
 	void processStats(numGames) {
 
 		stats.each{
-
 			it.averageScore = it.totalScore / numGames
 			it.remove 'totalScore'
 		}
@@ -76,9 +75,15 @@ class WhosTheAss {
 
 	void presentStats() {
 
-		stats.each{
+		println "== End of games summary =="
 
-			println it
+		stats.each{
+			println """\
+				|- ${it.strategy} -
+				|Best score: ${it.bestScore}
+				|Worst score: ${it.worstScore}
+				|Average score: ${it.averageScore}
+				|""".stripMargin()
 		}
 	}
 }
