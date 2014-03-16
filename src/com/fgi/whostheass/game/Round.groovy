@@ -34,9 +34,8 @@ class Round {
 
 	void updatePlayerViews() {
 
-		// New OpponentView to represent new hand state
 		def previousPlayer = allPlayers[playersWhoHavePlayedViews.size()]
-		playersWhoHavePlayedViews << opponentViewFor(previousPlayer)
+		playersWhoHavePlayedViews << opponentViewFor(previousPlayer) // New OpponentView required to represent new hand state
 
 		// Move any remaining players forward
 		currentPlayerView = playersStillToPlayViews.firstIfAny()
@@ -45,12 +44,12 @@ class Round {
 
 	def play() {
 
-		remainingPlayers.each {
-			playMove getPlayerMove(it)
+		remainingPlayers.each { player ->
+			playMove getPlayerMove(player)
 		}
 
-		allPlayers.each {
-			notifyPlayerOfOutcome(it)
+		allPlayers.each { player ->
+			notifyPlayerOfOutcome player
 		}
 
 		return winner
