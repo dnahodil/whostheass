@@ -1,5 +1,6 @@
 package com.fgi.whostheass
 
+import com.fgi.whostheass.cards.Deck
 import com.fgi.whostheass.game.Game
 import com.fgi.whostheass.strategy.OddStrategy
 import com.fgi.whostheass.strategy.SimpleStrategy
@@ -28,7 +29,8 @@ class WhosTheAss {
 
 		numGames.times{
 
-			def game = new Game(strategies)
+			def deck = new Deck()
+			def game = new Game(deck, strategies)
 			def results = game.play()
 
 			updateStats(results)

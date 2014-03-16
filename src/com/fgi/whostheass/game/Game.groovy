@@ -1,6 +1,5 @@
 package com.fgi.whostheass.game
 
-import com.fgi.whostheass.cards.Deck
 import com.fgi.whostheass.player.Player
 
 import static com.fgi.whostheass.game.Rules.getValidNumberOfPlayers
@@ -9,14 +8,14 @@ class Game {
 
 	def players = []
 
-	Game(playerStrategies) {
+	Game(deck, playerStrategies) {
 
 		if (!validNumberOfPlayers.contains(playerStrategies.size()))
 			throw new IllegalStateException("Must have $validNumberOfPlayers Players. Tried to play game with ${playerStrategies.size()}.")
 
 		initPlayers(playerStrategies)
 
-		new Deck().deal(players)
+		deck.deal(players)
 
 		sortPlayersStaringWith playerWithAss
 	}
