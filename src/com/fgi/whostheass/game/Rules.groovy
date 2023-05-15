@@ -1,7 +1,6 @@
 package com.fgi.whostheass.game
 
 final class Rules {
-
 	static final def validNumberOfPlayers = 3..8
 	static final def numberOfCardsInHand = 13
 

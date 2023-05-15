@@ -5,40 +5,33 @@ import com.fgi.whostheass.move.exceptions.InvalidMoveException
 import static com.fgi.whostheass.cards.Card.*
 
 class Player {
-
 	def id
 	def strategy
 	def cards = []
 
 	def playNormalRound(playersWhoHavePlayed, movesPlayed, playersStillToPlay) {
-
 		strategy.playNormalRound(cards, playersWhoHavePlayed, movesPlayed, playersStillToPlay)
 	}
 
 	def playAssRound(playersWhoHavePlayed, movesPlayed, playersStillToPlay) {
-
 		strategy.playAssRound(cards, playersWhoHavePlayed, movesPlayed, playersStillToPlay)
 	}
 
 	def startRound(playersStillToPlay, canLeadAss) {
-
 		strategy.startRound(cards, playersStillToPlay, canLeadAss)
 	}
 
 	void dealCard(card) {
-
 		cards << card
 		sortCards()
 	}
 
 	void pickUpCards(cardsPickedUp) {
-
 		cards.addAll cardsPickedUp
 		sortCards()
 	}
 
 	void useCards(cardsUsed) {
-
 		cardsUsed.each {
 			cardPlayed ->
 
@@ -49,33 +42,27 @@ class Player {
 	}
 
 	void updateAfterNormalRound(allPlayers, movesPlayed, winner) {
-
 		strategy.updateAfterNormalRound(allPlayers, movesPlayed, winner)
 	}
 
 	void updateAfterAssRound(allPlayers, movesPlayed, tookCards) {
-
 		strategy.updateAfterAssRound(allPlayers, movesPlayed, tookCards)
 	}
 
 	def hasTheAss() {
-
 		cards.find{ it == Ass } as boolean
 	}
 
 	def sortCards() {
-
 		cards = cards.sort{ it.points }
 	}
 
 	def getPoints() {
-
 		cards ? cards.sum{ it.points } : 0
 	}
 
 	@Override
 	public String toString() {
-
 		"Player " + ('A'..'Z')[id]
 	}
 }

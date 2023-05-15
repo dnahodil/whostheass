@@ -5,11 +5,9 @@ import com.fgi.whostheass.player.Player
 import static com.fgi.whostheass.game.Rules.getValidNumberOfPlayers
 
 class Game {
-
 	def players = []
 
 	Game(deck, playerStrategies) {
-
 		if (!validNumberOfPlayers.contains(playerStrategies.size()))
 			throw new IllegalStateException("Must have $validNumberOfPlayers Players. Tried to play game with ${playerStrategies.size()}.")
 
@@ -21,9 +19,7 @@ class Game {
 	}
 
 	def initPlayers(playerStrategies) {
-
 		playerStrategies.each {
-
 			players << playerFor(it)
 		}
 
@@ -31,12 +27,10 @@ class Game {
 	}
 
 	def play() {
-
 		def canLeadAss = true
 		def roundCount = 0
 
 		while (!anyPlayerHasGoneOut) {
-
 			def round = Round.forPlayers(++roundCount, players, canLeadAss)
 
 			def winner = round.play()
@@ -50,7 +44,6 @@ class Game {
 		}
 
 		playersInOrderAdded.each {
-
 			println "$it finished with ${it.points} points"
 		}
 
@@ -58,28 +51,23 @@ class Game {
 	}
 
 	def getAnyPlayerHasGoneOut() {
-
 		players.find { it.cards.size() == 0 }
 	}
 
 	def getPlayerWithAss() {
-
 		players.find { it.hasTheAss() }
 	}
 
 	def getPlayersInOrderAdded() {
-
 		players.sort { it.id }
 	}
 
 	void sortPlayersStaringWith(playStarter) {
-
 		players = players.dropWhile { it != playStarter } +
 		          players.takeWhile { it != playStarter }
 	}
 
 	def playerFor(strategy) {
-
 		new Player(
 			id: players.size(),
 			strategy: strategy

@@ -1,15 +1,12 @@
 package com.fgi.whostheass.game
 
 class AssRound extends Round {
-
 	AssRound(id, firstMove, players) {
-
 		super(id, firstMove, players)
 	}
 
 	@Override
 	def play() {
-
 		def winner = super.play()
 
 		winner.pickUpCards allCardsPlayed
@@ -19,7 +16,6 @@ class AssRound extends Round {
 
 	@Override
 	def getPlayedCards(player) {
-
 		player.playAssRound(
 			playersWhoHavePlayedViews,
 			movesAsCardArrays,
@@ -29,7 +25,6 @@ class AssRound extends Round {
 
 	@Override
 	void notifyPlayerOfOutcome(player) {
-
 		player.updateAfterAssRound(
 			opponentViewsFor(allPlayers),
 			moves*.cards,
@@ -39,11 +34,9 @@ class AssRound extends Round {
 
 	@Override
 	def getWinner() {
-
 		def lastMax
 
 		moves.tail().each { move ->
-
 			if (!lastMax || move.value >= lastMax.value) lastMax = move
 		}
 
@@ -51,7 +44,6 @@ class AssRound extends Round {
 	}
 
 	def getAllCardsPlayed() {
-
 		moves*.cards.flatten()
 	}
 }

@@ -4,7 +4,6 @@ import static com.fgi.whostheass.game.Rules.getNumberOfEachNumberInDeck
 import static com.fgi.whostheass.game.Rules.getNumberOfJokersInDeck
 
 public enum Card {
-
 	One(1),
 	Two(2),
 	Three(3),
@@ -26,13 +25,11 @@ public enum Card {
 	int points
 
 	Card(p) {
-
 		points = p
 	}
 
 	@Override
 	public String toString() {
-
 		switch(this) {
 			case [Joker, Ass]:
 				return name()
@@ -43,7 +40,6 @@ public enum Card {
 	}
 
 	static def getJokers() {
-
 		def jokers = []
 
 		numberOfJokersInDeck.times {
@@ -54,7 +50,6 @@ public enum Card {
 	}
 
 	static def getNumberCards() {
-
 		def numbers = []
 
 		(One..Thirteen).each { cardValue ->

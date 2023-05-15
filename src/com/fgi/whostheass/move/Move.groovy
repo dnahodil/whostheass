@@ -7,7 +7,6 @@ import com.fgi.whostheass.move.exceptions.InvalidMoveException
 import static com.fgi.whostheass.cards.Card.*
 
 abstract class Move {
-
 	def cards
 	def player
 
@@ -16,27 +15,22 @@ abstract class Move {
 	abstract def canWin()
 
 	def firstCard() {
-
 		cards.first()
 	}
 
 	def getValue() {
-
 		firstCard()
 	}
 
 	def canLead() {
-
 		true
 	}
 
 	def cardsUsed() {
-
 		cards
 	}
 
 	static def from(player, cards, round = null) {
-
 		_validatePlay(cards)
 
 		def move = _moveFor(player, cards, round)
@@ -56,24 +50,20 @@ abstract class Move {
 	}
 
 	static def _validatePlay(cards) {
-
 		def validPlay = _areAllSameValue(cards)
 
 		if (!validPlay) throw new InvalidMoveException("It is not a valid move to play these cards: $cards")
 	}
 
 	static def _containsAss(cards) {
-
 		cards.find { it == Ass }
 	}
 
 	static def _containsJoker(cards) {
-
 		cards.find { it == Joker }
 	}
 
 	static def _areAllSameValue(cards) {
-
 		def sortedCards = cards.sort()
 		def allSame = true
 		def firstValue = sortedCards.firstIfAny()
@@ -88,12 +78,10 @@ abstract class Move {
 	}
 
 	static def _moveFor(player, cards, round = null) {
-
 		cards = cards.sort()
 
 		// Weed out invalid plays, and play Joker on Ass
 		if (round && round instanceof AssRound) {
-
 			switch(cards.size()) {
 				case 0:
 					throw new InvalidMoveException("Can't pass on an Ass round. ($player)")
@@ -132,7 +120,6 @@ abstract class Move {
 
 	@Override
 	public String toString() {
-
 		"$player played ${this.class.simpleName}(${cards.join(", ")})"
 	}
 }

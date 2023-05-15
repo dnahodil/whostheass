@@ -1,14 +1,12 @@
 package com.fgi.whostheass.player
 
 class OpponentViewImpl implements OpponentView {
-
 	final int numberOfCards
 	final boolean includesTheAss
 
 	final String playerName
 
 	OpponentViewImpl(player) {
-
 		playerName = "$player"
 
 		numberOfCards = player.cards.size()
@@ -17,7 +15,6 @@ class OpponentViewImpl implements OpponentView {
 
 	@Override
 	public String toString() {
-
 		def cardsInfo = "$numberOfCards in hand"
 		def assInfo = includesTheAss ? " including The Ass" : ""
 
